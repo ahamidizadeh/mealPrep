@@ -1,0 +1,181 @@
+#container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: stretch;
+  padding: 20px;
+  height: 500px;
+  width: 800px;
+}
+#leftColumn,
+#rightColumn {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+#search-input {
+  border-radius: 10px;
+  width: 60%;
+  height: 40%;
+  text-align: center;
+}
+#searchBar {
+  /* min-height: 50px; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 15%;
+  background-color: lightgray;
+}
+
+#fridge {
+  display: flex;
+  flex-direction: column;
+  /* min-height: 200px; */
+  height: 65%;
+  background-color: white;
+}
+
+#meats,
+#veggies,
+#carbs {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  flex-grow: 1;
+  border: 1px solid gray;
+  padding: 10px;
+}
+
+#spices {
+  height: 10%;
+  background-color: white;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  justify-content: space-evenly;
+  gap: 7px;
+  padding: 5px;
+}
+.spice-section {
+  position: relative;
+  cursor: pointer;
+  margin-left: 5px;
+  display: flex;
+  max-width: 25px;
+  border: 1px solid rgb(222, 193, 193);
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+}
+.spice-section:hover {
+  transform: scale(2.5);
+  font-size: 5px;
+  /* filter: brightness(70%); */
+}
+.spice-section:hover::before {
+  content: attr(data-spice-name);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  font-weight: 500;
+  font-size: 5px;
+  padding: 5px; /* Adjust padding as needed */
+}
+.salt {
+  background-color: white;
+  color: black;
+}
+.pepper {
+  background-color: black;
+  color: white;
+}
+.cumin {
+  background-color: #ffd700;
+  color: #000;
+} /* Cumin - Yellow */
+.paprika {
+  background-color: #ff6347;
+  color: #000;
+} /* Paprika - Tomato */
+.coriander {
+  background-color: #228b22;
+  color: #fff;
+} /* Coriander - Forest Green */
+.cinnamon {
+  background-color: #a52a2a;
+  color: #fff;
+} /* Cinnamon - Brown */
+.tumeric {
+  background-color: #ffd700;
+  color: #000;
+} /* Turmeric - Yellow */
+.oregano {
+  background-color: #008000;
+  color: #fff;
+} /* Oregano - Green */
+.parsley {
+  background-color: #32cd32;
+  color: #fff;
+} /* Parsley - Lime Green */
+.thyme {
+  background-color: #808080;
+  color: #fff;
+} /* Thyme - Gray */
+.rosemary {
+  background-color: #556b2f;
+  color: #fff;
+} /* Rosemary - Dark Olive Green */
+.cayenne {
+  background-color: #ff4500;
+  color: #fff;
+} /* Cayenne - Orange Red */
+.cloves {
+  background-color: #800000;
+  color: #fff;
+} /* Cloves - Maroon */
+.nutmeg {
+  background-color: #8b4513;
+  color: #fff;
+} /* Nutmeg - Saddle Brown */
+.pumpkin_spice {
+  background-color: #ff7f50;
+  color: #fff;
+}
+.chilli-pepper {
+  background-color: #ff0000;
+  color: white;
+}
+.zafron {
+  background-color: #f4c542;
+  color: white;
+}
+
+#dropZone {
+  height: 30%;
+  width: 50%;
+  background-color: lightyellow;
+}
+
+#ingredients {
+  height: 15%;
+  background-color: lightcoral;
+}
+#macros {
+  height: 25%;
+  background-color: aqua;
+}
+#ingredient-image {
+  margin: 5px;
+  height: 50px;
+  width: 50px;
+  border-radius: 10px;
+}
+#ingredient-image:hover {
+  transform: scale(1.5);
+}
