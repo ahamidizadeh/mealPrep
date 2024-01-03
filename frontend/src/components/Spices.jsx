@@ -1,5 +1,4 @@
 import React from "react";
-import connectDB from "../../../db/db";
 
 export default function Spices() {
   const spices = [
@@ -23,11 +22,6 @@ export default function Spices() {
 
   const handleDragStart = (e) => {
     const spiceName = e.target.getAttribute("data-spice-name");
-
-    // e.dataTransfer.setData(
-    //   "application/json",
-    //   JSON.stringify({ type: "div", spiceName })
-    // );
     e.dataTransfer.setData("text/plain", spiceName);
   };
   return (

@@ -4,11 +4,13 @@ import axios from "axios";
 import Fridge from "./Fridge.jsx";
 import Spices from "./Spices.jsx";
 import Dropzone from "./Dropzone.jsx";
-
+import Ingredients from "./Ingredients.jsx";
 export default function RecipeBuilder() {
   const [ingredients, setIngredients] = useState([]);
+  const [droppedItems, setDroppedItems] = useState([]);
 
   useEffect(() => {
+    // setDroppedItems([]);
     axios
       .get("/api/ingredients")
       .then((res) => {
@@ -19,6 +21,9 @@ export default function RecipeBuilder() {
       });
   }, []);
 
+  const handleDrop = (item) => {
+    setDroppedItems((prevItems) => [...prevItems, item]);
+  };
   // const imageUrl = "https://storage.googleapis.com/ingredients3/avacado.jpeg";
   return (
     <div id="container">
@@ -30,8 +35,8 @@ export default function RecipeBuilder() {
       </div>
       <div id="rightColumn">
         <Spices />
-        <Dropzone />
-        <div id="ingredients">Ingredients</div>
+        <Dropzone onDrop={handleDrop} />
+        <Ingredients droppedItems={droppedItems} />
         <div id="macros">macros</div>
       </div>
     </div>
