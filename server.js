@@ -6,29 +6,41 @@ import Ingredient from "./db/models/ingredientsModel.js";
 dotenv.config();
 connectDB();
 
-// const firstIngredient = new Ingredient({
-//   name: "Carrot",
-//   units: "1 medium",
-//   calories: 25,
-//   imageURL: "https://storage.googleapis.com/ingredients3/carrots.jpeg",
-//   macros: {
-//     fat: 1.2,
-//     protein: 2,
-//     carbs: 18,
-//   },
-// });
-
-// firstIngredient
-//   .save()
-//   .then((savedIngredient) => {
-//     console.log("Ingredient saved:", savedIngredient.name);
+const firstIngredient = new Ingredient({
+  name: "turkey",
+  category: "Meats",
+  units: "100g",
+  calories: 189,
+  imageURL: "https://storage.googleapis.com/ingredients3/turkey.jpeg",
+  macros: {
+    fat: 7,
+    protein: 29,
+    carbs: 0,
+  },
+});
+// Ingredient.find({})
+//   .then((ingredients) => {
+//     ingredients.forEach((ingredient) => {
+//       ingredient.category = "Fruits and vegetables";
+//       ingredient.save();
+//     });
+//     console.log(`${ingredients.length} documents updated`);
 //   })
 //   .catch((error) => {
-//     console.error("Error saving ingredient:", error);
-//   })
-//   .finally(() => {
-//     console.log("YAY");
+//     console.error("Error updating documents:", error);
 //   });
+
+firstIngredient
+  .save()
+  .then((savedIngredient) => {
+    console.log("Ingredient saved:", savedIngredient.name);
+  })
+  .catch((error) => {
+    console.error("Error saving ingredient:", error);
+  })
+  .finally(() => {
+    console.log("YAY");
+  });
 
 const app = express();
 const PORT = process.env.PORT || 1234;

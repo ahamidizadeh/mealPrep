@@ -28,25 +28,6 @@
   background-color: lightgray;
 }
 
-#fridge {
-  display: flex;
-  flex-direction: column;
-  /* min-height: 200px; */
-  height: 65%;
-  background-color: white;
-}
-
-#meats,
-#veggies,
-#carbs {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
-  flex-grow: 1;
-  border: 1px solid gray;
-  padding: 10px;
-}
-
 #spices {
   height: 10%;
   background-color: white;
