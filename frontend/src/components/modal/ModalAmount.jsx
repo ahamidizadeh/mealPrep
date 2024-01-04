@@ -23,7 +23,7 @@ export default function CustomModal({
   }, [isOpen]);
 
   const handleConfirm = () => {
-    if (amount.trim() !== "" && unit.trim !== "") {
+    if (amount.trim() !== "" && unit.trim() !== "") {
       onConfirm({ amount, unit });
       onRequestClose();
     } else {
@@ -67,6 +67,7 @@ export default function CustomModal({
       <label style={{ display: "block", marginBottom: "10px", color: "#555" }}>
         Unit:
         <select value={unit} onChange={(e) => setUnit(e.target.value)}>
+          <option value="">Choose</option>
           <option value="cup">Cup</option>
           <option value="gram">Gram</option>
           <option value="ounce">Ounce</option>

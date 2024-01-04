@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function FruitsandVeggetables({ data }) {
+export default function FruitsandVeggetables({ data, searchedItem }) {
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 10;
 
@@ -12,21 +12,32 @@ export default function FruitsandVeggetables({ data }) {
   const handleDragStart = (e, ingredient) => {
     e.dataTransfer.setData("text/plain", ingredient.name);
   };
+
+  const filteredFruitsandVeggetables = displayedIngredients.filter(
+    (ingredient) =>
+      ingredient.name.toLowerCase().includes(searchedItem.toLowerCase())
+  );
   return (
     <div id="veggies">
-      {displayedIngredients.length > 0 ? (
-        displayedIngredients.map((ingredient) => (
-          <img
-            key={ingredient._id}
-            src={ingredient.imageURL}
-            id="ingredient-image"
-            draggable
-            onDragStart={(e) => handleDragStart(e, ingredient)}
-          />
-        ))
-      ) : (
-        <p>pending...</p>
-      )}
+      {filteredFruitsandVeggetables.length
+        ? filteredFruitsandVeggetables.map((ingredient) => (
+            <img
+              key={ingredient._id}
+              src={ingredient.imageURL}
+              id="ingredient-image"
+              draggable
+              onDragStart={(e) => handleDragStart(e, ingredient)}
+            />
+          ))
+        : displayedIngredients.map((ingredient) => (
+            <img
+              key={ingredient._id}
+              src={ingredient.imageURL}
+              id="ingredient-image"
+              draggable
+              onDragStart={(e) => handleDragStart(e, ingredient)}
+            />
+          ))}
       <div id="pagination">
         <button
           onClick={() =>

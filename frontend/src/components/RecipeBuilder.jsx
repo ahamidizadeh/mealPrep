@@ -8,6 +8,7 @@ import Ingredients from "./Ingredients.jsx";
 export default function RecipeBuilder() {
   const [ingredients, setIngredients] = useState([]);
   const [droppedItems, setDroppedItems] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     // setDroppedItems([]);
@@ -24,14 +25,26 @@ export default function RecipeBuilder() {
   const handleDrop = (item) => {
     setDroppedItems((prevItems) => [...prevItems, item]);
   };
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  // const filteredIngredients = ingredients.filter((ingredient) =>
+  //   ingredient.name.toLowerCase().includes(searchQuery.toLowerCase())
+  // );
   // const imageUrl = "https://storage.googleapis.com/ingredients3/avacado.jpeg";
   return (
     <div id="container">
       <div id="leftColumn">
         <div id="searchBar">
-          <input placeholder="search" id="search-input"></input>
+          <input
+            placeholder="search"
+            id="search-input"
+            value={searchQuery}
+            onChange={handleSearchChange}
+          ></input>
         </div>
-        <Fridge ingredients={ingredients} />
+        <Fridge ingredients={ingredients} searchedItem={searchQuery} />
       </div>
       <div id="rightColumn">
         <Spices />

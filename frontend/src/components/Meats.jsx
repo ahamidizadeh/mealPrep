@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function Meats({ data }) {
+export default function Meats({ data, searchedItem }) {
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 10;
 
@@ -12,22 +12,34 @@ export default function Meats({ data }) {
   const handleDragStart = (e, ingredient) => {
     e.dataTransfer.setData("text/plain", ingredient.name); // Adjust the data you want to transfer
   };
-
+  const filteredMeats = displayedIngredients.filter((ingredient) =>
+    ingredient.name.toLowerCase().includes(searchedItem.toLowerCase())
+  );
+  console.log("filteredMeats", filteredMeats);
   return (
     <div id="meats">
-      {displayedIngredients.length > 0 ? (
-        displayedIngredients.map((ingredient) => (
-          <img
-            key={ingredient._id}
-            src={ingredient.imageURL}
-            id="ingredient-image"
-            draggable
-            onDragStart={(e) => handleDragStart(e, ingredient)}
-          />
-        ))
-      ) : (
-        <p>pending...</p>
-      )}
+      {
+        filteredMeats.length
+          ? filteredMeats.map((ingredient) => (
+              <img
+                key={ingredient._id}
+                src={ingredient.imageURL}
+                id="ingredient-image"
+                draggable
+                onDragStart={(e) => handleDragStart(e, ingredient)}
+              />
+            ))
+          : displayedIngredients.map((ingredient) => (
+              <img
+                key={ingredient._id}
+                src={ingredient.imageURL}
+                id="ingredient-image"
+                draggable
+                onDragStart={(e) => handleDragStart(e, ingredient)}
+              />
+            ))
+        // <p>No matching ingredients in Meats</p>
+      }
       <div id="pagination">
         <button
           onClick={() =>

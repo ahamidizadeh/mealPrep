@@ -3,7 +3,7 @@ import FruitsandVeggetables from "./FruitsandVeggetables";
 import Meats from "./Meats";
 import "./styles/Fridge.css";
 
-export default function Fridge({ ingredients }) {
+export default function Fridge({ ingredients, searchedItem }) {
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 10;
 
@@ -23,8 +23,11 @@ export default function Fridge({ ingredients }) {
 
   return (
     <div id="fridge">
-      <Meats data={meats} />
-      <FruitsandVeggetables data={fruitsandVegetables} />
+      <Meats data={meats} searchedItem={searchedItem} />
+      <FruitsandVeggetables
+        data={fruitsandVegetables}
+        searchedItem={searchedItem}
+      />
       <div id="carbs">
         {" "}
         {displayedIngredients.length > 0 ? (
