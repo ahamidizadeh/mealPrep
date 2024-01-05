@@ -41,7 +41,7 @@ export default function CustomModal({
           backgroundColor: "rgba(0, 0, 0, 0.5)",
         },
         content: {
-          width: "300px",
+          width: "220px",
           height: "220px",
           margin: "auto",
           top: "50%",
@@ -81,6 +81,8 @@ export default function CustomModal({
           background: "#4CAF50",
           color: "white",
           padding: "10px 15px",
+          width: "fit-content",
+          height: "fit-content",
           borderRadius: "5px",
           border: "none",
           cursor: "pointer",
@@ -92,13 +94,14 @@ export default function CustomModal({
       </button>
       <button
         style={{
+          width: "fit-content",
+          height: "fit-content",
           background: "tomato",
           color: "white",
           padding: "10px 15px",
           borderRadius: "5px",
           border: "none",
           cursor: "pointer",
-          marginRight: "10px",
         }}
         onClick={onRequestClose}
       >

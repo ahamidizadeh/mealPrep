@@ -15,7 +15,7 @@ export default function Meats({ data, searchedItem }) {
   const filteredMeats = displayedIngredients.filter((ingredient) =>
     ingredient.name.toLowerCase().includes(searchedItem.toLowerCase())
   );
-  console.log("filteredMeats", filteredMeats);
+
   return (
     <div id="meats">
       {

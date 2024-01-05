@@ -28,7 +28,13 @@ export default function RecipeBuilder() {
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
   };
+  const handleRemoveIngredient = (index) => {
+    const updatedIngredients = [...droppedItems];
 
+    updatedIngredients.splice(index, 1);
+
+    setDroppedItems(updatedIngredients);
+  };
   // const filteredIngredients = ingredients.filter((ingredient) =>
   //   ingredient.name.toLowerCase().includes(searchQuery.toLowerCase())
   // );
@@ -49,7 +55,10 @@ export default function RecipeBuilder() {
       <div id="rightColumn">
         <Spices />
         <Dropzone onDrop={handleDrop} />
-        <Ingredients droppedItems={droppedItems} />
+        <Ingredients
+          droppedItems={droppedItems}
+          onRemoveIngredient={handleRemoveIngredient}
+        />
         <div id="macros">macros</div>
       </div>
     </div>

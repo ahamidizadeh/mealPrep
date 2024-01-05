@@ -158,6 +158,7 @@
 }
 
 #ingredients {
+  overflow-y: scroll;
   height: 35%;
   background-color: inherit;
 }

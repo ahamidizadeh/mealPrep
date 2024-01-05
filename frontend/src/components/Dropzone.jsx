@@ -22,7 +22,7 @@ export default function Dropzone({ onDrop }) {
   return (
     <button id="dropZone" onDragOver={handleDragOver} onDrop={handleDrop}>
       <p>Drag and drop desired ingredient here to build your recipe.</p>
-      {droppedItem}
+
       <CustomModal
         ingredient={droppedItem}
         isOpen={isModalOpen}
