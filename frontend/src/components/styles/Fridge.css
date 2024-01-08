@@ -4,21 +4,37 @@
   /* min-height: 200px; */
   border: 1px solid navy;
   border-radius: 10px;
-  height: 65%;
+  height: 100%;
   background-color: white;
 }
 button {
   height: 25px;
-  background-color: #a7d446;
+  background-color: inherit;
   font-size: small;
   border: none;
   border-radius: 5px;
+  font-size: 1.2em;
+}
+button:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.submit {
+  color: white;
+  width: 75px;
+  height: 30px;
+  margin-left: 175px;
+  margin-top: 15px;
+  font-size: 15px;
+  background-color: rgb(214, 132, 38);
 }
 .cancel-item {
   margin-left: 10px;
 }
 
 .dropped-item {
+  font-size: 15px;
   cursor: pointer;
   margin-top: 10px;
   margin-left: 10px;
@@ -43,7 +59,7 @@ button {
   width: 100px;
   justify-content: center;
   align-items: center;
-  bottom: 5px;
+  bottom: 25px;
   left: 40%;
   right: 50%;
   justify-content: space-between;

@@ -43,7 +43,6 @@ export default function CustomModal({
         content: {
           width: "220px",
           height: "220px",
-          margin: "auto",
           top: "50%",
           left: "50%",
           transform: "translate(-50%, -50%)",
@@ -54,7 +53,9 @@ export default function CustomModal({
         },
       }}
     >
-      <h2 style={{ marginBottom: "20px", color: "#333" }}>{ingredient}</h2>
+      <h2 style={{ marginBottom: "20px", color: "#333" }}>
+        {ingredient ? ingredient.name : null}
+      </h2>
       <label style={{ display: "block", marginBottom: "10px", color: "#555" }}>
         Amount:
         <input
@@ -66,9 +67,16 @@ export default function CustomModal({
       </label>
       <label style={{ display: "block", marginBottom: "10px", color: "#555" }}>
         Unit:
-        <select value={unit} onChange={(e) => setUnit(e.target.value)}>
+        <select
+          value={unit}
+          onChange={(e) => setUnit(e.target.value)}
+          style={{ overflowY: "scroll" }}
+        >
           <option value="">Choose</option>
           <option value="cup">Cup</option>
+          <option value="lbs">lbs</option>
+          <option value="Liter">Liter</option>
+          <option value="unit">unit</option>
           <option value="gram">Gram</option>
           <option value="ounce">Ounce</option>
           <option value="teaspoon">Teaspoon</option>

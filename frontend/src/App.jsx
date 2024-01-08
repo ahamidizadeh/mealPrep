@@ -1,12 +1,17 @@
 import "./App.css";
-import axios from "axios";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import RecipeBuilder from "./components/RecipeBuilder.jsx";
-
+import Lobby from "./components/Lobby";
+import Navbar from "./components/Navbar";
 function App() {
   return (
-    <>
-      <RecipeBuilder />
-    </>
+    <Router>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Lobby />} />
+        <Route path="/recipe-builder" element={<RecipeBuilder />} />
+      </Routes>
+    </Router>
   );
 }
 

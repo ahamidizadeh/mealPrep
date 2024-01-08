@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import FruitsandVeggetables from "./FruitsandVeggetables";
 import Meats from "./Meats";
+import FatsCarbs from "./FatsCarbs";
 import "./styles/Fridge.css";
 
 export default function Fridge({ ingredients, searchedItem }) {
@@ -28,41 +29,7 @@ export default function Fridge({ ingredients, searchedItem }) {
         data={fruitsandVegetables}
         searchedItem={searchedItem}
       />
-      <div id="carbs">
-        {" "}
-        {displayedIngredients.length > 0 ? (
-          displayedIngredients.map((ingredient) => (
-            <img
-              key={ingredient._id}
-              src={ingredient.imageURL}
-              id="ingredient-image"
-            />
-          ))
-        ) : (
-          <p>pending...</p>
-        )}
-        <div id="pagination">
-          <button
-            onClick={() =>
-              setCurrentPage((prevPage) => Math.max(prevPage - 1, 1))
-            }
-            disabled={currentPage === 1}
-          >
-            prev
-          </button>
-          <span>{currentPage}</span>
-          <button
-            onClick={() =>
-              setCurrentPage((prevPage) =>
-                Math.min(prevPage + 1, Math.ceil(ingredients.length / pageSize))
-              )
-            }
-            disabled={currentPage === Math.ceil(ingredients.length / pageSize)}
-          >
-            next
-          </button>
-        </div>
-      </div>
+      <FatsCarbs />
     </div>
   );
 }

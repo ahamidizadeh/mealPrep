@@ -5,6 +5,9 @@ import Fridge from "./Fridge.jsx";
 import Spices from "./Spices.jsx";
 import Dropzone from "./Dropzone.jsx";
 import Ingredients from "./Ingredients.jsx";
+import Macros from "./Macros.jsx";
+import Navbar from "./Navbar";
+
 export default function RecipeBuilder() {
   const [ingredients, setIngredients] = useState([]);
   const [droppedItems, setDroppedItems] = useState([]);
@@ -40,27 +43,30 @@ export default function RecipeBuilder() {
   // );
   // const imageUrl = "https://storage.googleapis.com/ingredients3/avacado.jpeg";
   return (
-    <div id="container">
-      <div id="leftColumn">
-        <div id="searchBar">
-          <input
-            placeholder="search"
-            id="search-input"
-            value={searchQuery}
-            onChange={handleSearchChange}
-          ></input>
+    <>
+      <Navbar />
+      <div id="container">
+        <div id="leftColumn">
+          <div id="searchBar">
+            <input
+              placeholder="search"
+              id="search-input"
+              value={searchQuery}
+              onChange={handleSearchChange}
+            ></input>
+          </div>
+          <Fridge ingredients={ingredients} searchedItem={searchQuery} />
         </div>
-        <Fridge ingredients={ingredients} searchedItem={searchQuery} />
+        <div id="rightColumn">
+          <Spices />
+          <Dropzone onDrop={handleDrop} />
+          <Ingredients
+            droppedItems={droppedItems}
+            onRemoveIngredient={handleRemoveIngredient}
+          />
+          <Macros droppedItems={droppedItems} />
+        </div>
       </div>
-      <div id="rightColumn">
-        <Spices />
-        <Dropzone onDrop={handleDrop} />
-        <Ingredients
-          droppedItems={droppedItems}
-          onRemoveIngredient={handleRemoveIngredient}
-        />
-        <div id="macros">macros</div>
-      </div>
-    </div>
+    </>
   );
 }

@@ -22,7 +22,10 @@ export default function Spices() {
 
   const handleDragStart = (e) => {
     const spiceName = e.target.getAttribute("data-spice-name");
-    e.dataTransfer.setData("text/plain", spiceName);
+    e.dataTransfer.setData(
+      "application/JSON",
+      JSON.stringify({ name: spiceName, category: "Spices" })
+    );
   };
   return (
     <div id="spices">

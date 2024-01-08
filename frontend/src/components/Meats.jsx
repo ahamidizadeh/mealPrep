@@ -10,7 +10,7 @@ export default function Meats({ data, searchedItem }) {
   const displayedIngredients = data ? data.slice(startIndex, endIndex) : [];
 
   const handleDragStart = (e, ingredient) => {
-    e.dataTransfer.setData("text/plain", ingredient.name); // Adjust the data you want to transfer
+    e.dataTransfer.setData("application/json", JSON.stringify(ingredient)); // Adjust the data you want to transfer
   };
   const filteredMeats = displayedIngredients.filter((ingredient) =>
     ingredient.name.toLowerCase().includes(searchedItem.toLowerCase())
@@ -47,7 +47,7 @@ export default function Meats({ data, searchedItem }) {
           }
           disabled={currentPage === 1}
         >
-          prev
+          {"<"}
         </button>
         <span>{currentPage}</span>
         <button
@@ -58,7 +58,7 @@ export default function Meats({ data, searchedItem }) {
           }
           disabled={currentPage === Math.ceil(data.length / pageSize)}
         >
-          next
+          {">"}
         </button>
       </div>
     </div>

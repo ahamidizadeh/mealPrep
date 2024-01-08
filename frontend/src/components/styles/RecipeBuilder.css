@@ -15,7 +15,7 @@
 }
 #search-input {
   background-color: transparent;
-  border: 1px solie #001f3f;
+  border: 1px solid #001f3f;
   color: #001f3f;
   border-radius: 10px;
   width: 60%;
@@ -42,6 +42,7 @@
   justify-content: space-evenly;
   gap: 7px;
   padding: 5px;
+  margin-top: 15px;
 }
 .spice-section {
   position: relative;
@@ -141,28 +142,48 @@
   background-color: #f4c542;
   color: white;
 }
-
+.drop-area {
+  cursor: crosshair;
+  background: transparent;
+  border-radius: 10px;
+  height: 100px;
+  margin-left: 20px;
+  margin-top: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 14px;
+  width: 150px;
+  background-color: #bcaaa4;
+  color: #fff;
+}
 #dropZone {
+  display: flex;
   color: white;
   cursor: crosshair;
   border-radius: 16px;
+  border: 2px dashed #8d6e63;
+  background-color: #d7ccc8;
   border: none;
-  align-items: center;
-  justify-content: center;
-  display: flex;
   margin-left: 10px;
-  margin-top: 15px;
+  margin-top: 25px;
   height: 30%;
   width: 95%;
-  background-color: #001f3f;
 }
-
+.recipe-inputs {
+  margin-left: 30px;
+  margin-top: 50px;
+  font-family: "Lobster", cursive;
+  color: black;
+}
 #ingredients {
   overflow-y: scroll;
   height: 35%;
   background-color: inherit;
 }
 #macros {
+  display: flex;
   height: 25%;
   background-color: white;
 }
@@ -174,4 +195,15 @@
 }
 #ingredient-image:hover {
   transform: scale(1.2);
+}
+.circle {
+  margin-left: 30px;
+  height: 100px;
+  width: 100px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  border-radius: 50%;
+  background-color: rgb(233, 216, 219);
 }

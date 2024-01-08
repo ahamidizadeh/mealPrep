@@ -10,7 +10,7 @@ export default function FruitsandVeggetables({ data, searchedItem }) {
   const displayedIngredients = data ? data.slice(startIndex, endIndex) : [];
 
   const handleDragStart = (e, ingredient) => {
-    e.dataTransfer.setData("text/plain", ingredient.name);
+    e.dataTransfer.setData("application/JSON", JSON.stringify(ingredient));
   };
 
   const filteredFruitsandVeggetables = displayedIngredients.filter(
@@ -45,7 +45,7 @@ export default function FruitsandVeggetables({ data, searchedItem }) {
           }
           disabled={currentPage === 1}
         >
-          prev
+          {"<"}
         </button>
         <span>{currentPage}</span>
         <button
@@ -56,7 +56,7 @@ export default function FruitsandVeggetables({ data, searchedItem }) {
           }
           disabled={currentPage === Math.ceil(data.length / pageSize)}
         >
-          next
+          {">"}
         </button>
       </div>
     </div>
