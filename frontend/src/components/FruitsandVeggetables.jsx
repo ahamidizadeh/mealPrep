@@ -40,6 +40,7 @@ export default function FruitsandVeggetables({ data, searchedItem }) {
           ))}
       <div id="pagination">
         <button
+          className="pagination-button"
           onClick={() =>
             setCurrentPage((prevPage) => Math.max(prevPage - 1, 1))
           }
@@ -49,6 +50,7 @@ export default function FruitsandVeggetables({ data, searchedItem }) {
         </button>
         <span>{currentPage}</span>
         <button
+          className="pagination-button"
           onClick={() =>
             setCurrentPage((prevPage) =>
               Math.min(prevPage + 1, Math.ceil(data.length / pageSize))

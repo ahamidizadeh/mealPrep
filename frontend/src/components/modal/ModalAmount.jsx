@@ -77,8 +77,8 @@ export default function CustomModal({
           <option value="lbs">lbs</option>
           <option value="Liter">Liter</option>
           <option value="unit">unit</option>
-          <option value="gram">Gram</option>
-          <option value="ounce">Ounce</option>
+          <option value="grams">Gram</option>
+          <option value="ounces">Ounces</option>
           <option value="teaspoon">Teaspoon</option>
           <option value="tablespoon">Tablespoon</option>
         </select>

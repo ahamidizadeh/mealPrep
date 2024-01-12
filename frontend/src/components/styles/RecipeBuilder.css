@@ -16,7 +16,7 @@
 #search-input {
   background-color: transparent;
   border: 1px solid #001f3f;
-  color: #001f3f;
+  color: #7a3d1f;
   border-radius: 10px;
   width: 60%;
   height: 40%;
@@ -25,14 +25,21 @@
 #searchBar {
   /* min-height: 50px; */
   background-color: white;
-  color: #333333;
+  color: #7a3d1f;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 15%;
   /* background-color: #001f3f; */
 }
-
+.spice-header {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 20px;
+  color: #7a3d1f;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
 #spices {
   height: 10%;
   background-color: white;
@@ -42,21 +49,20 @@
   justify-content: space-evenly;
   gap: 7px;
   padding: 5px;
-  margin-top: 15px;
 }
 .spice-section {
   position: relative;
   cursor: pointer;
   margin-left: 5px;
   display: flex;
-  max-width: 25px;
+  max-width: 30px;
   border: 1px solid rgb(222, 193, 193);
   border-radius: 10px;
   justify-content: center;
   align-items: center;
 }
 .spice-section:hover {
-  transform: scale(1.8);
+  transform: scale(2);
   font-size: 5px;
   /* filter: brightness(70%); */
 }
@@ -111,7 +117,7 @@
   color: #fff;
 } /* Parsley - Lime Green */
 .thyme {
-  background-color: #808080;
+  background-color: #0a2e0b;
   color: #fff;
 } /* Thyme - Gray */
 .rosemary {
@@ -138,8 +144,8 @@
   background-color: #ff0000;
   color: white;
 }
-.zafron {
-  background-color: #f4c542;
+.saffron {
+  background-color: #960808;
   color: white;
 }
 .drop-area {
@@ -184,8 +190,14 @@
 }
 #macros {
   display: flex;
+  justify-content: space-around;
   height: 25%;
   background-color: white;
+}
+.macro-container {
+  color: #7a3d1f;
+  text-align: center;
+  position: relative;
 }
 #ingredient-image {
   margin: 5px;
@@ -197,13 +209,39 @@
   transform: scale(1.2);
 }
 .circle {
-  margin-left: 30px;
-  height: 100px;
-  width: 100px;
-  text-align: center;
+  position: relative;
+  background-color: rgb(233, 216, 219);
+  border-radius: 50%;
+  padding: 10px;
+  font-size: 18px;
+  margin: 10px;
+}
+.macro-container label {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.submit {
   align-items: center;
   justify-content: center;
+  color: white;
   display: flex;
-  border-radius: 50%;
-  background-color: rgb(233, 216, 219);
+  font-size: 15px;
+  height: 40px;
+  padding: 15px;
+  width: 100px;
+  border-radius: 5px;
+  border: 1px none;
+  background-color: #e36323; /* Adjust the button size */
+}
+.submit:hover {
+  transform: scale(1.1);
+  cursor: pointer;
 }

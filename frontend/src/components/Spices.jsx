@@ -17,7 +17,7 @@ export default function Spices() {
     "Nutmeg",
     "Pumpkin spice",
     "Chilli pepper",
-    "Zafron",
+    "Saffron",
   ];
 
   const handleDragStart = (e) => {
@@ -28,16 +28,19 @@ export default function Spices() {
     );
   };
   return (
-    <div id="spices">
-      {spices.map((spice, index) => (
-        <div
-          key={index}
-          className={`spice-section ${spice.toLowerCase().replace(" ", "-")}`}
-          data-spice-name={spice}
-          draggable
-          onDragStart={(e) => handleDragStart(e, spice)}
-        ></div>
-      ))}
-    </div>
+    <>
+      <h2 className="spice-header"> Spices</h2>
+      <div id="spices">
+        {spices.map((spice, index) => (
+          <div
+            key={index}
+            className={`spice-section ${spice.toLowerCase().replace(" ", "-")}`}
+            data-spice-name={spice}
+            draggable
+            onDragStart={(e) => handleDragStart(e, spice)}
+          ></div>
+        ))}
+      </div>
+    </>
   );
 }

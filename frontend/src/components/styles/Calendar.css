@@ -1,0 +1,18 @@
+.rbc-calendar {
+  width: 500px;
+}
+.rbc-toolbar {
+  flex-wrap: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin: 0;
+}
+.rbc-toolbar button {
+  color: #7a3d1f;
+  font-size: 10px;
+}
+.rbc-btn-group {
+  white-space: nowrap;
+}

@@ -1,0 +1,25 @@
+/* Lobby.css (or in your existing stylesheet) */
+.lobby-container {
+  width: 800px;
+  max-height: 500px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.recipe-section {
+  height: 500px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+}
+.user-recipes {
+  border: 0.4px solid rgb(47, 42, 42);
+  height: 30%;
+}
+.all-recipes {
+  border: 0.4px solid rgb(47, 42, 42);
+  height: 70%;
+}
+button {
+  color: #7a3d1f;
+}

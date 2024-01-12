@@ -7,7 +7,8 @@
   height: 100%;
   background-color: white;
 }
-button {
+
+.pagination-button {
   height: 25px;
   background-color: inherit;
   font-size: small;
@@ -15,25 +16,28 @@ button {
   border-radius: 5px;
   font-size: 1.2em;
 }
-button:hover {
+/* .spice-container {
+  position: relative;
+} */
+/* .header {
+  text-align: center;
+  font-size: 10px;
+  position: absolute;
+  bottom: 10px;
+} */
+.pagination-button:hover {
   transform: scale(1.1);
   cursor: pointer;
 }
 
-.submit {
-  color: white;
-  width: 75px;
-  height: 30px;
-  margin-left: 175px;
-  margin-top: 15px;
-  font-size: 15px;
-  background-color: rgb(214, 132, 38);
-}
 .cancel-item {
   margin-left: 10px;
 }
 
 .dropped-item {
+  border-radius: 5px;
+  border: none;
+  height: 25px;
   font-size: 15px;
   cursor: pointer;
   margin-top: 10px;

@@ -46,11 +46,13 @@ export default function Meats({ data, searchedItem }) {
             setCurrentPage((prevPage) => Math.max(prevPage - 1, 1))
           }
           disabled={currentPage === 1}
+          className="pagination-button"
         >
           {"<"}
         </button>
         <span>{currentPage}</span>
         <button
+          className="pagination-button"
           onClick={() =>
             setCurrentPage((prevPage) =>
               Math.min(prevPage + 1, Math.ceil(data.length / pageSize))

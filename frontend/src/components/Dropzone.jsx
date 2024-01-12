@@ -40,6 +40,7 @@ export default function Dropzone({ onDrop }) {
         />
       </div>
       <div className="recipe-inputs">
+        <input type="file" id="imageUpload" accept="image/*"></input>
         <input placeholder="Recipe Name"></input>
         <select style={{ height: "20px", overflowY: "scroll" }}>
           <option>select food type</option>
