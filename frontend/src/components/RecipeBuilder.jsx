@@ -11,6 +11,7 @@ import Navbar from "./Navbar";
 export default function RecipeBuilder() {
   const [ingredients, setIngredients] = useState([]);
   const [droppedItems, setDroppedItems] = useState([]);
+  const [formData, setFormData] = useState({});
   const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
@@ -24,6 +25,9 @@ export default function RecipeBuilder() {
         console.error("Error Fetching ingredients", error);
       });
   }, []);
+  const handleFormChange = (newFormData) => {
+    setFormData({ ...formData, ...newFormData });
+  };
 
   const handleDrop = (item) => {
     setDroppedItems((prevItems) => [...prevItems, item]);
@@ -59,12 +63,12 @@ export default function RecipeBuilder() {
         </div>
         <div id="rightColumn">
           <Spices />
-          <Dropzone onDrop={handleDrop} />
+          <Dropzone onDrop={handleDrop} onFormChange={handleFormChange} />
           <Ingredients
             droppedItems={droppedItems}
             onRemoveIngredient={handleRemoveIngredient}
           />
-          <Macros droppedItems={droppedItems} />
+          <Macros droppedItems={droppedItems} formData={formData} />
         </div>
       </div>
     </>

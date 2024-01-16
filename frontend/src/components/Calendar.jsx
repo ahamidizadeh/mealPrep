@@ -16,11 +16,6 @@ const Calendar = () => {
     // Handle event drop, update your data or make API calls here
     console.log("Event dropped:", event);
   };
-  //   const customCalendarStyles = {
-  //     width: "500px",
-  //     color: "#7a3d1f",
-  //     border: "none",
-  //   };
 
   return (
     <div className="calendar-container">

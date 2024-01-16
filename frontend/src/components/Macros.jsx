@@ -6,13 +6,13 @@ const unitConversions = {
   ounces: 28.3495,
 };
 
-export default function Macros({ droppedItems }) {
+export default function Macros({ droppedItems, formData }) {
   const [fats, setFats] = useState(0);
   const [carbs, setCarbs] = useState(0);
   const [protein, setProtein] = useState(0);
 
   useEffect(() => {
-    // Calculate total grams of each macro from dropped items
+    // Calculate total grams of each acro from dropped items
     const totalFatsGrams = droppedItems.reduce(
       (total, item) =>
         total +
@@ -48,9 +48,12 @@ export default function Macros({ droppedItems }) {
     setCarbs(totalCarbsGrams);
     setProtein(totalProteinGrams);
   }, [droppedItems]);
-  console.log(fats, protein, carbs);
+  const handleRecipeSubmit = () => {
+    if (formData.image && formData.recipeName && formData.selectedFoodType) {
+    }
+  };
 
-  console.log("dropped:", droppedItems);
+  console.log("formdata", formData);
   return (
     <>
       <div id="macros">
@@ -68,7 +71,9 @@ export default function Macros({ droppedItems }) {
         </div>
       </div>
       <div className="centered">
-        <button className="submit">Submit</button>
+        <button className="submit" onClick={handleRecipeSubmit}>
+          Submit
+        </button>
       </div>
     </>
   );

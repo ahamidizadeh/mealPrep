@@ -8,15 +8,15 @@ import LandingPage from "./components/LandingPage";
 
 function App() {
   return (
-    // <LandingPage />
-    <Router>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Lobby />} />
-        <Route path="/recipe-builder" element={<RecipeBuilder />} />
-        <Route path="/contact-us" element={<Contact />} />
-      </Routes>
-    </Router>
+    <LandingPage />
+    // <Router>
+    //   <Navbar />
+    //   <Routes>
+    //     <Route path="/" element={<Lobby />} />
+    //     <Route path="/recipe-builder" element={<RecipeBuilder />} />
+    //     <Route path="/contact-us" element={<Contact />} />
+    //   </Routes>
+    // </Router>
   );
 }
 

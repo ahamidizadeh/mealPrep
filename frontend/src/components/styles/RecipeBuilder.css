@@ -153,18 +153,36 @@
   background: transparent;
   border-radius: 10px;
   height: 100px;
-  margin-left: 20px;
+  margin-left: 5px;
   margin-top: 5px;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   font-size: 14px;
-  width: 150px;
+  min-width: 80px;
   background-color: #bcaaa4;
   color: #fff;
 }
+.recipe-instructions {
+  width: 100px;
+  margin-top: 3px;
+  position: absolute;
+  left: 282px;
+}
+textarea::placeholder {
+  color: white;
+}
+
+.recipe-instructions textarea {
+  background-color: #bcaaa4;
+  border-radius: 5px;
+  border: none;
+  width: 100px;
+  height: 100px;
+}
 #dropZone {
+  position: relative;
   display: flex;
   color: white;
   cursor: crosshair;
@@ -175,11 +193,12 @@
   margin-left: 10px;
   margin-top: 25px;
   height: 30%;
-  width: 95%;
+  width: 70%;
 }
 .recipe-inputs {
-  margin-left: 30px;
-  margin-top: 50px;
+  max-width: 100px;
+  margin-left: 5px;
+  margin-top: 5px;
   font-family: "Lobster", cursive;
   color: black;
 }

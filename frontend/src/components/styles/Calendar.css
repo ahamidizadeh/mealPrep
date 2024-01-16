@@ -11,8 +11,21 @@
 }
 .rbc-toolbar button {
   color: #7a3d1f;
-  font-size: 10px;
+  width: 50px;
+  margin: 2px;
+  border-radius: 5px;
+  display: inline-flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  font-size: 12px;
 }
 .rbc-btn-group {
   white-space: nowrap;
+}
+.rbc-day-bg {
+  background-color: rgba(239, 233, 213, 0.32);
+}
+.rbc-button-link {
+  color: #7a3d1f;
 }
