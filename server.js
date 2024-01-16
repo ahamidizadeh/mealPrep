@@ -3,6 +3,8 @@ import cors from "cors";
 import connectDB from "./db/db.js";
 import dotenv from "dotenv";
 import Ingredient from "./db/models/ingredientsModel.js";
+import { router as authRoutes } from "./routes/authRoutes.js";
+
 dotenv.config();
 connectDB();
 
@@ -53,12 +55,12 @@ app.get("/api/ingredients", async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
-
+app.use(express.json());
 app.use(cors());
-app.get("/api", () => {
+app.post("/api", () => {
   console.log("frontend is connected");
 });
-
+app.use("/api/auth", authRoutes);
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

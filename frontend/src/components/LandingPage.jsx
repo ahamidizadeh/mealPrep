@@ -13,21 +13,22 @@ const LandingPage = () => {
   });
 
   const handleRegisterChange = (event) => {
-    setRegisterData({
-      ...registerData,
+    setRegisterData((prevData) => ({
+      ...prevData,
       [event.target.name]: event.target.value,
-    });
+    }));
   };
 
   const handleLoginChange = (event) => {
-    setLoginData({ ...loginData, [event.target.name]: event.target.value });
+    setLoginData({ [event.target.name]: event.target.value });
   };
 
   const handleRegisterSubmit = async (event) => {
     event.preventDefault();
 
     try {
-      const response = await fetch("/register", {
+      console.log("register data: ", registerData);
+      const response = await fetch("/api/auth/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -51,7 +52,7 @@ const LandingPage = () => {
     event.preventDefault();
 
     try {
-      const response = await fetch("/login", {
+      const response = await fetch("/api/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -100,7 +101,9 @@ const LandingPage = () => {
             onChange={handleRegisterChange}
           />
         </label>
-        <button type="submit">Register</button>
+        <button type="submit" onClick={handleRegisterSubmit}>
+          Register
+        </button>
       </form>
 
       {/* Login Form */}

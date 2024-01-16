@@ -1,12 +1,18 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
-  username: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
+  username: {
+    type: String,
+    required: true,
+    unique: true,
+    minlength: 5,
+    maxlength: 20,
+  },
+  password: { type: String, required: true, minlength: 8, maxlength: 255 },
   recipes: [{ type: mongoose.Schema.Types.ObjectId, ref: "Recipe" }],
   // Add other fields as needed
 });
 
 const User = mongoose.model("User", userSchema);
 
-module.exports = User;
+export default User;
