@@ -1,7 +1,10 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./styles/Landingpage.css";
 
 const LandingPage = ({ onLogin }) => {
+  const navigate = useNavigate();
+
   const [registerData, setRegisterData] = useState({
     username: "",
     password: "",
@@ -68,6 +71,7 @@ const LandingPage = ({ onLogin }) => {
         // Store the token in local storage or a secure place
         localStorage.setItem("token", data.token);
         onLogin();
+        navigate("/lobby");
         // Login successful, you might want to redirect the user or update the UI
         console.log("Login successful");
       } else {

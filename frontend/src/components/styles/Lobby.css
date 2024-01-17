@@ -12,15 +12,21 @@
   display: flex;
   flex-direction: column;
 }
+.profile {
+  position: absolute;
+  left: 50px;
+  top: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 .logout-btn {
   cursor: pointer;
   transition: background-color 0.3s ease;
   color: white;
   border: none;
   border-radius: 5px;
-  position: absolute;
-  left: 50px;
-  top: 50px;
   font-size: 15px;
   width: 125px;
   height: 40px;
