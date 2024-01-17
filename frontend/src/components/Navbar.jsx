@@ -7,7 +7,7 @@ export default function Navbar() {
     <nav>
       <ul>
         <li>
-          <Link to="/"> Lobby </Link>
+          <Link to="/lobby"> Lobby </Link>
         </li>
         <li>
           <Link to="/recipe-builder"> Recipe Builder </Link>

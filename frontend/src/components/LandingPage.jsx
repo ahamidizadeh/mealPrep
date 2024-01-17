@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./styles/Landingpage.css";
 
-const LandingPage = () => {
+const LandingPage = ({ onLogin }) => {
   const [registerData, setRegisterData] = useState({
     username: "",
     password: "",
@@ -20,14 +20,16 @@ const LandingPage = () => {
   };
 
   const handleLoginChange = (event) => {
-    setLoginData({ [event.target.name]: event.target.value });
+    setLoginData((prevData) => ({
+      ...prevData,
+      [event.target.name]: event.target.value,
+    }));
   };
 
   const handleRegisterSubmit = async (event) => {
     event.preventDefault();
 
     try {
-      console.log("register data: ", registerData);
       const response = await fetch("/api/auth/register", {
         method: "POST",
         headers: {
@@ -52,6 +54,7 @@ const LandingPage = () => {
     event.preventDefault();
 
     try {
+      console.log("loginData:", loginData);
       const response = await fetch("/api/auth/login", {
         method: "POST",
         headers: {
@@ -64,6 +67,7 @@ const LandingPage = () => {
         const data = await response.json();
         // Store the token in local storage or a secure place
         localStorage.setItem("token", data.token);
+        onLogin();
         // Login successful, you might want to redirect the user or update the UI
         console.log("Login successful");
       } else {

@@ -1,5 +1,9 @@
 import User from "../db/models/userModel.js";
 import bcrypt from "bcrypt";
+import dotenv from "dotenv";
+import jwt from "jsonwebtoken";
+dotenv.config();
+
 export async function register(req, res) {
   try {
     const { username, password } = req.body;
@@ -43,5 +47,27 @@ export async function register(req, res) {
 }
 
 export async function login(req, res) {
-  console.log("trying to login");
+  try {
+    // Extract user information from request body
+    const { username, password } = req.body;
+
+    // Find the user in the database
+    const user = await User.findOne({ username });
+
+    // Check if the user exists
+    const passwordCheck = await bcrypt.compare(password, user.password);
+    if (!user || !passwordCheck) {
+      return res.status(401).json({ error: "Invalid username or password" });
+    }
+
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
+      expiresIn: "1h",
+    });
+    // Authentication successful
+    res.cookie("token", token, { httpOnly: true });
+    res.status(200).json({ token });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
 }

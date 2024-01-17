@@ -12,6 +12,23 @@
   display: flex;
   flex-direction: column;
 }
+.logout-btn {
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  position: absolute;
+  left: 50px;
+  top: 50px;
+  font-size: 15px;
+  width: 125px;
+  height: 40px;
+  background-color: rgb(147, 19, 19);
+}
+.logout-btn:hover {
+  background-color: rgb(181, 3, 3);
+}
 .user-recipes {
   border: 0.4px solid rgb(47, 42, 42);
   height: 30%;
