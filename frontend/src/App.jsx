@@ -10,13 +10,15 @@ import PrivateRoute from "./PrivateRoutes.jsx";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [username, setUsername] = useState("");
 
   const handleLogout = () => {
     localStorage.removeItem("token");
     setIsLoggedIn(false);
   };
-  const handleLogin = () => {
+  const handleLogin = (username) => {
     setIsLoggedIn(true);
+    setUsername(username);
   };
   return (
     <>
@@ -28,7 +30,7 @@ function App() {
           path="/lobby"
           element={
             <PrivateRoute isLoggedIn={isLoggedIn}>
-              <Lobby onLogout={handleLogout} />
+              <Lobby onLogout={handleLogout} username={username} />
             </PrivateRoute>
           }
         />

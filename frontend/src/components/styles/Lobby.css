@@ -13,6 +13,7 @@
   flex-direction: column;
 }
 .profile {
+  color: #7a3d1f;
   position: absolute;
   left: 50px;
   top: 50px;

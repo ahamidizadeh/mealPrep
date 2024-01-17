@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./styles/Landingpage.css";
+import { jwtDecode } from "jwt-decode";
 
 const LandingPage = ({ onLogin }) => {
   const navigate = useNavigate();
@@ -68,14 +69,17 @@ const LandingPage = ({ onLogin }) => {
 
       if (response.ok) {
         const data = await response.json();
-        // Store the token in local storage or a secure place
-        localStorage.setItem("token", data.token);
-        onLogin();
+        if (data.token) {
+          localStorage.setItem("token", data.token);
+          const decodedToken = jwtDecode(data.token);
+          const username = decodedToken.username;
+          onLogin(username);
+        }
+
         navigate("/lobby");
-        // Login successful, you might want to redirect the user or update the UI
+
         console.log("Login successful");
       } else {
-        // Login failed, handle errors
         console.error("Login failed");
       }
     } catch (error) {

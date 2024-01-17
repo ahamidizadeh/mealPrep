@@ -2,6 +2,7 @@ import User from "../db/models/userModel.js";
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
+
 dotenv.config();
 
 export async function register(req, res) {
@@ -60,9 +61,13 @@ export async function login(req, res) {
       return res.status(401).json({ error: "Invalid username or password" });
     }
 
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
-      expiresIn: "1h",
-    });
+    const token = jwt.sign(
+      { userId: user._id, username: user.username },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "1h",
+      }
+    );
     // Authentication successful
     res.cookie("token", token, { httpOnly: true });
     res.status(200).json({ token });
