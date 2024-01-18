@@ -68,7 +68,7 @@ export default function RecipeBuilder() {
             droppedItems={droppedItems}
             onRemoveIngredient={handleRemoveIngredient}
           />
-          <Macros droppedItems={droppedItems} formData={formData} />
+          <Macros droppedItems={droppedItems} recipeData={formData} />
         </div>
       </div>
     </>

@@ -4,6 +4,7 @@ import connectDB from "./db/db.js";
 import dotenv from "dotenv";
 import Ingredient from "./db/models/ingredientsModel.js";
 import { router as authRoutes } from "./routes/authRoutes.js";
+import { router as recipeRoutes } from "./routes/recipesRoutes.js";
 
 dotenv.config();
 connectDB();
@@ -61,6 +62,7 @@ app.post("/api", () => {
   console.log("frontend is connected");
 });
 app.use("/api/auth", authRoutes);
+app.use("/api/recipes", recipeRoutes);
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

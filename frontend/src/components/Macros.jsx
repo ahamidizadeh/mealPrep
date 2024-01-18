@@ -6,7 +6,7 @@ const unitConversions = {
   ounces: 28.3495,
 };
 
-export default function Macros({ droppedItems, formData }) {
+export default function Macros({ droppedItems, recipeData }) {
   const [fats, setFats] = useState(0);
   const [carbs, setCarbs] = useState(0);
   const [protein, setProtein] = useState(0);
@@ -42,18 +42,57 @@ export default function Macros({ droppedItems, formData }) {
           100,
       0
     );
-    console.log("total fats", totalFatsGrams);
-    // Update state with calculated values
+
     setFats(totalFatsGrams);
     setCarbs(totalCarbsGrams);
     setProtein(totalProteinGrams);
   }, [droppedItems]);
-  const handleRecipeSubmit = () => {
-    if (formData.image && formData.recipeName && formData.selectedFoodType) {
+
+  const handleRecipeSubmit = async () => {
+    // check form data is not empty
+    const isFormDataValid =
+      Object.values(recipeData).every((value) => value) &&
+      droppedItems.length > 0;
+
+    if (isFormDataValid) {
+      try {
+        console.log("sending");
+        const token = localStorage.getItem("token");
+        const formData = new FormData();
+
+        formData.append("recipeName", recipeData.recipeName);
+        formData.append("instructions", recipeData.instructions);
+        formData.append("selectedFoodType", recipeData.selectedFoodType);
+        formData.append("image", recipeData.image);
+        droppedItems.forEach((item, index) => {
+          formData.append(`ingredients[${index}]`, JSON.stringify(item));
+        });
+        const fetchOptions = {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`, // Replace with actual token from state or storage
+          },
+          body: formData, // Sending the FormData object
+        };
+
+        const response = await fetch("/api/recipes", fetchOptions);
+
+        if (response.ok) {
+          const data = await response.json();
+          console.log("Success:", data);
+          // Handle success (e.g., redirect, show success message)
+        } else {
+          console.error("Error:", response.statusText);
+          // Handle errors (e.g., show error message)
+        }
+      } catch (error) {
+        console.error("Error during recipe submission:", error);
+      }
+    } else {
+      console.error("Please fill all the required fields.");
     }
   };
 
-  console.log("formdata", formData);
   return (
     <>
       <div id="macros">
