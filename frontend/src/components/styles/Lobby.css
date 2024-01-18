@@ -36,14 +36,11 @@
 .logout-btn:hover {
   background-color: rgb(181, 3, 3);
 }
-.user-recipes {
-  border: 0.4px solid rgb(47, 42, 42);
-  height: 30%;
-}
-.all-recipes {
+
+/* .all-recipes {
   border: 0.4px solid rgb(47, 42, 42);
   height: 70%;
-}
+} */
 button {
   color: #7a3d1f;
 }
