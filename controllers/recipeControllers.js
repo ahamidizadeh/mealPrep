@@ -56,3 +56,13 @@ export async function saveRecipe(req, res) {
     res.status(500).json({ message: "Internal Server Error" });
   }
 }
+export async function getRecipes(req, res) {
+  try {
+    const allRecipes = await Recipe.find({});
+
+    res.status(200).json(allRecipes);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+}
