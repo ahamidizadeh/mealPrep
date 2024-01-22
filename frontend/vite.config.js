@@ -12,4 +12,8 @@ export default defineConfig({
       "/api": "http://localhost:1234",
     },
   },
+  define: {
+    "process.env": {}, // If you need to access process.env in your code
+    global: {}, // Define global as an empty object or equate it to window based on your needs
+  },
 });

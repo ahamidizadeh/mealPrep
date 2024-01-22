@@ -1,13 +1,23 @@
 .all-recipes {
-  border: 0.2px dashed rgb(47, 42, 42);
+  border: none;
+  border-radius: 10px;
   height: 70%;
   display: flex;
   flex-wrap: wrap;
   gap: 10px; /* Adjust the gap between cards */
   padding: 10px;
-  background-color: rgb(239, 231, 231);
+  background-color: beige;
 }
-
+h4.allrecipes-heading {
+  background-color: aquamarine;
+  padding: 0;
+  margin-left: 5px;
+  width: 90px;
+  text-align: center;
+  height: fit-content;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
 .recipe-card {
   cursor: pointer;
   width: 75px; /* Adjust the width of the card */

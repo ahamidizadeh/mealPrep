@@ -1,6 +1,6 @@
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import RecipeBuilder from "./components/RecipeBuilder.jsx";
 import Lobby from "./components/Lobby";
 import Navbar from "./components/Navbar";
@@ -11,14 +11,16 @@ import PrivateRoute from "./PrivateRoutes.jsx";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState("");
+  const [userId, setUserId] = useState("");
 
   const handleLogout = () => {
     localStorage.removeItem("token");
     setIsLoggedIn(false);
   };
-  const handleLogin = (username) => {
+  const handleLogin = (username, userId) => {
     setIsLoggedIn(true);
     setUsername(username);
+    setUserId(userId);
   };
   return (
     <>
@@ -30,7 +32,11 @@ function App() {
           path="/lobby"
           element={
             <PrivateRoute isLoggedIn={isLoggedIn}>
-              <Lobby onLogout={handleLogout} username={username} />
+              <Lobby
+                onLogout={handleLogout}
+                username={username}
+                userId={userId}
+              />
             </PrivateRoute>
           }
         />

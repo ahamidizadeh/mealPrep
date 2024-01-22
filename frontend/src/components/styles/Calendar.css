@@ -1,31 +1,22 @@
-.rbc-calendar {
-  width: 500px;
+.fc {
+  background-color: beige;
+  height: 100%;
+  min-width: 500px;
+  border-radius: 10px;
 }
-.rbc-toolbar {
-  flex-wrap: nowrap;
+.calendar-container {
+  margin-left: 10px;
+}
+.fc-header-toolbar .fc-toolbar {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  margin: 0;
-}
-.rbc-toolbar button {
-  color: #7a3d1f;
-  width: 50px;
-  margin: 2px;
-  border-radius: 5px;
-  display: inline-flex;
   justify-content: center;
   text-align: center;
-  align-items: center;
-  font-size: 12px;
 }
-.rbc-btn-group {
-  white-space: nowrap;
+.fc .fc-daygrid-day-frame {
+  min-height: 100px;
 }
-.rbc-day-bg {
-  background-color: rgba(239, 233, 213, 0.32);
-}
-.rbc-button-link {
-  color: #7a3d1f;
+/* .fc-event-main {
+  cursor: move;
+} */
+.fc-daygrid-day-frame .fc-scrollgrid-sync-inner {
 }

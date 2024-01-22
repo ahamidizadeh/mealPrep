@@ -73,7 +73,8 @@ const LandingPage = ({ onLogin }) => {
           localStorage.setItem("token", data.token);
           const decodedToken = jwtDecode(data.token);
           const username = decodedToken.username;
-          onLogin(username);
+          const userId = decodedToken.userId;
+          onLogin(username, userId);
         }
 
         navigate("/lobby");
