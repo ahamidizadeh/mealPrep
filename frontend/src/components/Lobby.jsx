@@ -9,7 +9,6 @@ import "./styles/UserRecipes.css";
 import "./styles/Calendar.css";
 import "./styles/Lobby.css";
 import { useRecipes } from "../RecipeContext";
-import RecipeDetails from "./RecipeDetails.jsx";
 import UserRecipes from "./UserRecipes.jsx";
 
 export default function Lobby({ onLogout, username, recipes, userId }) {
@@ -40,6 +39,7 @@ export default function Lobby({ onLogout, username, recipes, userId }) {
     navigate("/");
   };
   const handleDrop = (info) => {
+    console.log(info);
     const uniqueId = generateUniqueId();
     const endTime = new Date(info.date);
     endTime.setMinutes(endTime.getMinutes() + 30);
@@ -58,6 +58,17 @@ export default function Lobby({ onLogout, username, recipes, userId }) {
 
   const handleDateClick = () => {};
   const handleEventReceive = (info) => {};
+  const handleEventChange = (event) => {
+    const newStartTime = event.event.start;
+    const eventId = event.oldEvent.id;
+
+    setScheduledRecipes(
+      scheduledRecipes.map((r) =>
+        r.id === eventId ? { ...r, start: newStartTime } : r
+      )
+    );
+  };
+  console.log("upgraded version", scheduledRecipes);
 
   return (
     <div className="lobby-container">
@@ -88,7 +99,7 @@ export default function Lobby({ onLogout, username, recipes, userId }) {
           droppable={true}
           editable={true}
           selectable={true}
-          // eventAdd={handleEventAdd}
+          eventChange={handleEventChange}
           events={scheduledRecipes}
           drop={handleDrop}
           eventReceive={handleEventReceive}
