@@ -7,7 +7,7 @@ import Navbar from "./components/Navbar";
 import Contact from "./components/ContactUs";
 import LandingPage from "./components/LandingPage";
 import PrivateRoute from "./PrivateRoutes.jsx";
-
+import RecipeDetails from "./components/RecipeDetails";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState("");
@@ -53,6 +53,14 @@ function App() {
           element={
             <PrivateRoute isLoggedIn={isLoggedIn}>
               <Contact />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/recipes/:id"
+          element={
+            <PrivateRoute>
+              <RecipeDetails />
             </PrivateRoute>
           }
         />

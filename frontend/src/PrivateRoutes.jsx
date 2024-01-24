@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Navigate } from "react-router-dom";
-import { jwtDecode } from "jwt-decode";
+import { AuthContext } from "./AuthContext";
+
 const PrivateRoute = ({ children, isLoggedIn }) => {
+  const { authToken } = useContext(AuthContext);
   const [recipes, setRecipes] = useState([]);
 
   useEffect(() => {
@@ -31,7 +33,7 @@ const PrivateRoute = ({ children, isLoggedIn }) => {
     fetchRecipes();
   }, []);
 
-  return isLoggedIn ? (
+  return authToken ? (
     React.cloneElement(children, { recipes })
   ) : (
     <Navigate to="/" replace />

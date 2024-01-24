@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AllRecipes from "./AllRecipes.jsx";
-
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
@@ -9,12 +8,15 @@ import interactionPlugin from "@fullcalendar/interaction";
 import "./styles/UserRecipes.css";
 import "./styles/Calendar.css";
 import "./styles/Lobby.css";
+import { useRecipes } from "../RecipeContext";
+import RecipeDetails from "./RecipeDetails.jsx";
 import UserRecipes from "./UserRecipes.jsx";
 
 export default function Lobby({ onLogout, username, recipes, userId }) {
   const [scheduledRecipes, setScheduledRecipes] = useState([
     { title: "meow", date: "2024-01-12" },
   ]);
+  const { selectedRecipe, setSelectedRecipe } = useRecipes();
 
   const navigate = useNavigate();
 
@@ -27,13 +29,17 @@ export default function Lobby({ onLogout, username, recipes, userId }) {
   const eventAlreadyExists = (eventId) => {
     return scheduledRecipes.some((event) => event.id === eventId);
   };
+  const handleSelectingRecipe = (id) => {
+    const recipe = recipes.find((recipe) => recipe._id === id);
+    setSelectedRecipe(recipe);
+    navigate(`/recipes/${id}`);
+  };
 
   const handleLogout = () => {
     onLogout();
     navigate("/");
   };
   const handleDrop = (info) => {
-    console.log(info);
     const uniqueId = generateUniqueId();
     const endTime = new Date(info.date);
     endTime.setMinutes(endTime.getMinutes() + 30);
@@ -50,12 +56,9 @@ export default function Lobby({ onLogout, username, recipes, userId }) {
     }
   };
 
-  const handleDateClick = () => {
-    console.log("clicking dates");
-  };
-  const handleEventReceive = (info) => {
-    console.log("state", scheduledRecipes);
-  };
+  const handleDateClick = () => {};
+  const handleEventReceive = (info) => {};
+
   return (
     <div className="lobby-container">
       {" "}
@@ -66,7 +69,10 @@ export default function Lobby({ onLogout, username, recipes, userId }) {
         </button>
       </div>
       <div className="recipe-section">
-        <UserRecipes userRecipes={filteredByUserRecipes} />
+        <UserRecipes
+          onRecipeSelect={handleSelectingRecipe}
+          userRecipes={filteredByUserRecipes}
+        />
         <AllRecipes recipes={recipes} />
       </div>
       <div className="calendar-container">

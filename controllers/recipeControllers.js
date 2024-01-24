@@ -66,3 +66,6 @@ export async function getRecipes(req, res) {
     res.status(500).json({ message: "Internal server error" });
   }
 }
+export async function getSelectedRecipe(req, res) {
+  console.log("trying to fetch recipes");
+}

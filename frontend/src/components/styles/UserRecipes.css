@@ -1,12 +1,38 @@
 .user-recipes {
   border: none;
-  height: 30%;
+  height: 100%;
   border-radius: 10px;
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px; /* Adjust the gap between cards */
-  padding: 10px;
+  position: relative;
+  align-items: center;
+  padding: 0 30px;
   background-color: beige;
+}
+.scrollable-content {
+  flex-grow: 1; /* Take up all available horizontal space */
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  /* justify-content: center; */
+  gap: 10px;
+  width: 250px;
+}
+.scroll-pointer {
+  position: absolute;
+  top: 50%;
+  font-size: 24px;
+  color: rgb(137, 110, 59);
+  cursor: pointer;
+  border-radius: 10%;
+  z-index: 10000;
+}
+.left-pointer {
+  left: 0;
+  top: 72px;
+}
+.right-pointer {
+  right: 0;
+  top: 72px;
 }
 h4.userrecipes-heading {
   border-radius: 5px;
@@ -21,10 +47,8 @@ h4.userrecipes-heading {
 }
 .recipe-card {
   cursor: move;
-  width: 75px;
-  max-height: 137px; /* Adjust the width of the card */
-  display: flex;
-  align-items: center;
+  min-width: 75px;
+  min-height: 125px; /* Adjust the width of the card */
   justify-content: center;
   flex-direction: column;
   border-radius: 10px; /* Round edges */

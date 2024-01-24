@@ -7,13 +7,14 @@ import Dropzone from "./Dropzone.jsx";
 import Ingredients from "./Ingredients.jsx";
 import Macros from "./Macros.jsx";
 import Navbar from "./Navbar";
+import { useIngredients } from "../RecipeContext.jsx";
 
 export default function RecipeBuilder() {
-  const [ingredients, setIngredients] = useState([]);
+  // const [ingredients, setIngredients] = useState([]);
   const [droppedItems, setDroppedItems] = useState([]);
   const [formData, setFormData] = useState({});
   const [searchQuery, setSearchQuery] = useState("");
-
+  const { setIngredients, ingredients } = useIngredients();
   useEffect(() => {
     // setDroppedItems([]);
     axios
