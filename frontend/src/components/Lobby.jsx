@@ -5,23 +5,60 @@ import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
+import { debounce } from "lodash";
 import "./styles/UserRecipes.css";
 import "./styles/Calendar.css";
 import "./styles/Lobby.css";
+import { useAuthContext } from "../AuthContext.jsx";
 import { useRecipes } from "../RecipeContext";
 import UserRecipes from "./UserRecipes.jsx";
 
-export default function Lobby({ onLogout, username, recipes, userId }) {
-  const [scheduledRecipes, setScheduledRecipes] = useState([
-    { title: "meow", date: "2024-01-12" },
-  ]);
-  const { selectedRecipe, setSelectedRecipe } = useRecipes();
+export default function Lobby({ recipes }) {
+  const { setSelectedRecipe, bookedRecipes } = useRecipes();
+  const [scheduledRecipes, setScheduledRecipes] = useState(bookedRecipes);
+
+  const { logout, id, username } = useAuthContext();
 
   const navigate = useNavigate();
+  const scheduleRecipes = async (data, id) => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch(`/api/recipes/book/${id}`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const result = await response.json();
+      console.log("Success:", result.message);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+  const debouncedSaveData = debounce(() => {
+    scheduleRecipes(scheduledRecipes, id);
+  }, 6000);
+
+  useEffect(() => {
+    debouncedSaveData();
+
+    // Cleanup
+    return () => {
+      debouncedSaveData.cancel();
+    };
+  }, [scheduledRecipes]);
 
   const filteredByUserRecipes = recipes.filter(
-    (recipe) => recipe.userId === userId
+    (recipe) => recipe.userId === id
   );
+
   const generateUniqueId = () => {
     return `${Date.now()}-${Math.floor(Math.random() * 10000)}`;
   };
@@ -35,8 +72,7 @@ export default function Lobby({ onLogout, username, recipes, userId }) {
   };
 
   const handleLogout = () => {
-    onLogout();
-    navigate("/");
+    logout();
   };
   const handleDrop = (info) => {
     console.log(info);
@@ -68,7 +104,6 @@ export default function Lobby({ onLogout, username, recipes, userId }) {
       )
     );
   };
-  console.log("upgraded version", scheduledRecipes);
 
   return (
     <div className="lobby-container">

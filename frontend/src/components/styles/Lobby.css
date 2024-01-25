@@ -1,5 +1,6 @@
 /* Lobby.css (or in your existing stylesheet) */
 .lobby-container {
+  margin-left: 400px;
   width: 800px;
   max-height: 500px;
   display: flex;

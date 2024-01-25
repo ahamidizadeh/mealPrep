@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./styles/Landingpage.css";
 import { jwtDecode } from "jwt-decode";
+import { useAuthContext } from "../AuthContext";
 
-const LandingPage = ({ onLogin }) => {
+const LandingPage = () => {
   const navigate = useNavigate();
+  const { login } = useAuthContext();
 
   const [registerData, setRegisterData] = useState({
     username: "",
@@ -58,7 +60,6 @@ const LandingPage = ({ onLogin }) => {
     event.preventDefault();
 
     try {
-      console.log("loginData:", loginData);
       const response = await fetch("/api/auth/login", {
         method: "POST",
         headers: {
@@ -70,11 +71,10 @@ const LandingPage = ({ onLogin }) => {
       if (response.ok) {
         const data = await response.json();
         if (data.token) {
-          localStorage.setItem("token", data.token);
+          login(data.token);
           const decodedToken = jwtDecode(data.token);
           const username = decodedToken.username;
           const userId = decodedToken.userId;
-          onLogin(username, userId);
         }
 
         navigate("/lobby");

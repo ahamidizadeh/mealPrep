@@ -9,41 +9,36 @@ import LandingPage from "./components/LandingPage";
 import PrivateRoute from "./PrivateRoutes.jsx";
 import RecipeDetails from "./components/RecipeDetails";
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [username, setUsername] = useState("");
-  const [userId, setUserId] = useState("");
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const [username, setUsername] = useState("");
+  // const [userId, setUserId] = useState("");
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    setIsLoggedIn(false);
-  };
-  const handleLogin = (username, userId) => {
-    setIsLoggedIn(true);
-    setUsername(username);
-    setUserId(userId);
-  };
+  // const handleLogout = () => {
+  //   localStorage.removeItem("token");
+  //   setIsLoggedIn(false);
+  // };
+  // const handleLogin = (username, userId) => {
+  //   setIsLoggedIn(true);
+  //   setUsername(username);
+  //   setUserId(userId);
+  // };
   return (
     <>
-      {isLoggedIn && <Navbar />}
+      {/* {isLoggedIn && <Navbar />} */}
       <Routes>
-        <Route path="/" element={<LandingPage onLogin={handleLogin} />} />
-
+        <Route path="/" element={<LandingPage />} />
         <Route
           path="/lobby"
           element={
-            <PrivateRoute isLoggedIn={isLoggedIn}>
-              <Lobby
-                onLogout={handleLogout}
-                username={username}
-                userId={userId}
-              />
+            <PrivateRoute>
+              <Lobby />
             </PrivateRoute>
           }
         />
         <Route
           path="/recipe-builder"
           element={
-            <PrivateRoute isLoggedIn={isLoggedIn}>
+            <PrivateRoute>
               <RecipeBuilder />
             </PrivateRoute>
           }
@@ -51,7 +46,7 @@ function App() {
         <Route
           path="/contact-us"
           element={
-            <PrivateRoute isLoggedIn={isLoggedIn}>
+            <PrivateRoute>
               <Contact />
             </PrivateRoute>
           }

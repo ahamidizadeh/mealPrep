@@ -1,12 +1,9 @@
 import React, { useState } from "react";
 import { useRecipes } from "../RecipeContext";
 import "./styles/RecipeDetails.css";
-import { useIngredients } from "../RecipeContext.jsx";
-
 export default function RecipeDetails() {
   const [servings, setServings] = useState(1);
-  const { selectedRecipe } = useRecipes();
-  const { ingredients } = useIngredients();
+  const { selectedRecipe, ingredients } = useRecipes();
 
   const handleServingChange = (event) => {
     setServings(event.target.value);
