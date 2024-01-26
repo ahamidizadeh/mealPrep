@@ -24,7 +24,7 @@ export const RecipeProvider = ({ children }) => {
       }
 
       const data = await response.json();
-      console.log("context data booked:", data);
+
       setBookedRecipes(data);
     } catch (error) {
       if (error instanceof SyntaxError) {

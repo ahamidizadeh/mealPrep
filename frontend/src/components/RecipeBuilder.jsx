@@ -15,17 +15,17 @@ export default function RecipeBuilder() {
   const [formData, setFormData] = useState({});
   const [searchQuery, setSearchQuery] = useState("");
   const { setIngredients, ingredients } = useRecipes();
-  useEffect(() => {
-    // setDroppedItems([]);
-    axios
-      .get("/api/ingredients")
-      .then((res) => {
-        setIngredients(res.data);
-      })
-      .catch((error) => {
-        console.error("Error Fetching ingredients", error);
-      });
-  }, []);
+  // useEffect(() => {
+  //   // setDroppedItems([]);
+  //   axios
+  //     .get("/api/ingredients")
+  //     .then((res) => {
+  //       setIngredients(res.data);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error Fetching ingredients", error);
+  //     });
+  // }, []);
   const handleFormChange = (newFormData) => {
     setFormData({ ...formData, ...newFormData });
   };

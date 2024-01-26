@@ -10,6 +10,7 @@ const userSchema = new mongoose.Schema({
   },
   password: { type: String, required: true, minlength: 8, maxlength: 255 },
   recipes: [{ type: mongoose.Schema.Types.ObjectId, ref: "Recipe" }],
+  bookedRecipes: [{ id: String, title: String, start: String, end: String }],
   // Add other fields as needed
 });
 

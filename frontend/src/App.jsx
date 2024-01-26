@@ -8,23 +8,14 @@ import Contact from "./components/ContactUs";
 import LandingPage from "./components/LandingPage";
 import PrivateRoute from "./PrivateRoutes.jsx";
 import RecipeDetails from "./components/RecipeDetails";
-function App() {
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
-  // const [username, setUsername] = useState("");
-  // const [userId, setUserId] = useState("");
+import { useAuthContext } from "./AuthContext.jsx";
 
-  // const handleLogout = () => {
-  //   localStorage.removeItem("token");
-  //   setIsLoggedIn(false);
-  // };
-  // const handleLogin = (username, userId) => {
-  //   setIsLoggedIn(true);
-  //   setUsername(username);
-  //   setUserId(userId);
-  // };
+function App() {
+  const { authToken } = useAuthContext();
+
   return (
     <>
-      {/* {isLoggedIn && <Navbar />} */}
+      {authToken && <Navbar />}
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route

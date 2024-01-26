@@ -3,7 +3,9 @@ const router = express.Router();
 import {
   saveRecipe,
   getRecipes,
-  getSelectedRecipe,
+  bookRecipes,
+  getBookedRecipes,
+  deleteBookedRecipe,
 } from "../controllers/recipeControllers.js";
 import upload from "../middlewares/uploadMiddleware.js";
 import authenticate from "../middlewares/authMiddleware.js";
@@ -11,6 +13,7 @@ import authenticate from "../middlewares/authMiddleware.js";
 router.use(authenticate);
 router.post("/", upload.single("image"), saveRecipe);
 router.get("/", getRecipes);
-router.get("/:id", getSelectedRecipe);
-
+router.get("/booked/:id", getBookedRecipes);
+router.post("/book/:id", bookRecipes);
+router.delete("/delete/:id", deleteBookedRecipe);
 export { router };

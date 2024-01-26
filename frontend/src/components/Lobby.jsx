@@ -10,13 +10,14 @@ import "./styles/UserRecipes.css";
 import "./styles/Calendar.css";
 import "./styles/Lobby.css";
 import { useAuthContext } from "../AuthContext.jsx";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { useRecipes } from "../RecipeContext";
 import UserRecipes from "./UserRecipes.jsx";
 
 export default function Lobby({ recipes }) {
   const { setSelectedRecipe, bookedRecipes } = useRecipes();
-  const [scheduledRecipes, setScheduledRecipes] = useState(bookedRecipes);
-
+  const [scheduledRecipes, setScheduledRecipes] = useState([]);
+  console.log("booked:", bookedRecipes, "state:", scheduledRecipes);
   const { logout, id, username } = useAuthContext();
 
   const navigate = useNavigate();
@@ -42,6 +43,7 @@ export default function Lobby({ recipes }) {
       console.error("Error:", error);
     }
   };
+
   const debouncedSaveData = debounce(() => {
     scheduleRecipes(scheduledRecipes, id);
   }, 6000);
@@ -53,7 +55,11 @@ export default function Lobby({ recipes }) {
     return () => {
       debouncedSaveData.cancel();
     };
-  }, [scheduledRecipes]);
+  }, []);
+
+  useEffect(() => {
+    setScheduledRecipes(bookedRecipes);
+  }, [bookedRecipes]);
 
   const filteredByUserRecipes = recipes.filter(
     (recipe) => recipe.userId === id
@@ -75,7 +81,6 @@ export default function Lobby({ recipes }) {
     logout();
   };
   const handleDrop = (info) => {
-    console.log(info);
     const uniqueId = generateUniqueId();
     const endTime = new Date(info.date);
     endTime.setMinutes(endTime.getMinutes() + 30);
@@ -93,6 +98,46 @@ export default function Lobby({ recipes }) {
   };
 
   const handleDateClick = () => {};
+  const handleEventDragStop = (info) => {
+    console.log("dargging stop");
+    const id = info.event.id;
+    // Get the event and its location
+    const event = info.event;
+    const jsEvent = info.jsEvent;
+
+    const trashCan = document.getElementById("external-delete-zone");
+    const trashCanRect = trashCan.getBoundingClientRect();
+    // Check if the event's final drop location overlaps with the delete zone
+    if (
+      jsEvent.clientX >= trashCanRect.left &&
+      jsEvent.clientX <= trashCanRect.right &&
+      jsEvent.clientY >= trashCanRect.top &&
+      jsEvent.clientY <= trashCanRect.bottom
+    ) {
+      // Event was dropped inside the delete zone, remove it
+      event.remove();
+      const updateEvents = scheduledRecipes.filter(
+        (recipe) => recipe.id !== id
+      );
+      setScheduledRecipes(updateEvents);
+      deleteRecipeBooked(id);
+    }
+  };
+  const deleteRecipeBooked = async (eventId) => {
+    try {
+      const token = localStorage.getItem("token");
+      fetch(`/api/recipes/delete/${eventId}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  console.log("state recipes:", scheduledRecipes);
   const handleEventReceive = (info) => {};
   const handleEventChange = (event) => {
     const newStartTime = event.event.start;
@@ -137,9 +182,14 @@ export default function Lobby({ recipes }) {
           eventChange={handleEventChange}
           events={scheduledRecipes}
           drop={handleDrop}
+          eventDragStop={handleEventDragStop}
           eventReceive={handleEventReceive}
         />
       </div>
+      <DeleteIcon
+        style={{ color: "black", fontSize: 35, marginLeft: 35, marginTop: 250 }}
+        id="external-delete-zone"
+      />
     </div>
   );
 }
