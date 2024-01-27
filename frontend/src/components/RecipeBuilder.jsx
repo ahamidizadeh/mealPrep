@@ -10,22 +10,11 @@ import Navbar from "./Navbar";
 import { useRecipes } from "../RecipeContext.jsx";
 
 export default function RecipeBuilder() {
-  // const [ingredients, setIngredients] = useState([]);
   const [droppedItems, setDroppedItems] = useState([]);
   const [formData, setFormData] = useState({});
   const [searchQuery, setSearchQuery] = useState("");
-  const { setIngredients, ingredients } = useRecipes();
-  // useEffect(() => {
-  //   // setDroppedItems([]);
-  //   axios
-  //     .get("/api/ingredients")
-  //     .then((res) => {
-  //       setIngredients(res.data);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error Fetching ingredients", error);
-  //     });
-  // }, []);
+  const { ingredients } = useRecipes();
+
   const handleFormChange = (newFormData) => {
     setFormData({ ...formData, ...newFormData });
   };

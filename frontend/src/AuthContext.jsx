@@ -14,7 +14,6 @@ export const AuthProvider = ({ children }) => {
     if (authToken) {
       try {
         const decoded = jwtDecode(authToken);
-        console.log("decoded,: ", decoded);
         setId(decoded.userId);
         setUsername(decoded.username);
       } catch (error) {

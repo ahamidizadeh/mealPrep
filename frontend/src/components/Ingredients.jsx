@@ -2,7 +2,6 @@ import React from "react";
 import "./styles/Fridge.css";
 
 export default function Ingredients({ droppedItems, onRemoveIngredient }) {
-  console.log("dropping", droppedItems);
   const categoryColors = {
     Meats: "tomato",
     "Fruits and vegetables": "green",

@@ -10,20 +10,20 @@ export default function CustomModal({
   onRequestClose,
   onConfirm,
 }) {
-  const [amount, setAmount] = React.useState("");
+  const [amount, setAmount] = React.useState(0);
   const [unit, setUnit] = React.useState("");
   const [message, setMessage] = React.useState("");
 
   useEffect(() => {
     if (isOpen) {
-      setAmount("");
+      setAmount(0);
       setUnit("");
       setMessage("");
     }
   }, [isOpen]);
 
   const handleConfirm = () => {
-    if (amount.trim() !== "" && unit.trim() !== "") {
+    if (amount !== 0 && unit.trim() !== "") {
       onConfirm({ amount, unit });
       onRequestClose();
     } else {
@@ -61,7 +61,7 @@ export default function CustomModal({
         <input
           type="number"
           value={amount}
-          onChange={(e) => setAmount(e.target.value)}
+          onChange={(e) => setAmount(Number(e.target.value))}
           placeholder="Enter amount"
         />
       </label>

@@ -1,3 +1,4 @@
+import { drop } from "lodash";
 import React, { useState, useEffect } from "react";
 
 const unitConversions = {
@@ -74,7 +75,7 @@ export default function Macros({ droppedItems, recipeData }) {
           },
           body: formData, // Sending the FormData object
         };
-
+        console.log("sending this form:", formData);
         const response = await fetch("/api/recipes", fetchOptions);
 
         if (response.ok) {

@@ -13,32 +13,34 @@ import { useAuthContext } from "../AuthContext.jsx";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useRecipes } from "../RecipeContext";
 import UserRecipes from "./UserRecipes.jsx";
+import ShoppingList from "./ShoppingList.jsx";
 
 export default function Lobby({ recipes }) {
-  const { setSelectedRecipe, bookedRecipes } = useRecipes();
+  const { setSelectedRecipe, bookedRecipes, setShoppingList } = useRecipes();
   const [scheduledRecipes, setScheduledRecipes] = useState([]);
-  console.log("booked:", bookedRecipes, "state:", scheduledRecipes);
   const { logout, id, username } = useAuthContext();
 
   const navigate = useNavigate();
-  const scheduleRecipes = async (data, id) => {
+  const scheduleRecipes = async (data, userId) => {
     try {
-      const token = localStorage.getItem("token");
-      const response = await fetch(`/api/recipes/book/${id}`, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
+      if (userId) {
+        const token = localStorage.getItem("token");
+        console.log("scheduling for user", userId);
+        const response = await fetch(`/api/recipes/book/${userId}`, {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        });
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const result = await response.json();
       }
-
-      const result = await response.json();
-      console.log("Success:", result.message);
     } catch (error) {
       console.error("Error:", error);
     }
@@ -46,7 +48,7 @@ export default function Lobby({ recipes }) {
 
   const debouncedSaveData = debounce(() => {
     scheduleRecipes(scheduledRecipes, id);
-  }, 6000);
+  }, 4000);
 
   useEffect(() => {
     debouncedSaveData();
@@ -80,26 +82,10 @@ export default function Lobby({ recipes }) {
   const handleLogout = () => {
     logout();
   };
-  const handleDrop = (info) => {
-    const uniqueId = generateUniqueId();
-    const endTime = new Date(info.date);
-    endTime.setMinutes(endTime.getMinutes() + 30);
-
-    const newEvent = {
-      id: uniqueId,
-      title: info.draggedEl.innerText,
-      start: info.date,
-      end: endTime,
-    };
-
-    if (!eventAlreadyExists(uniqueId)) {
-      setScheduledRecipes([...scheduledRecipes, newEvent]);
-    }
-  };
+  const handleDrop = (info) => {};
 
   const handleDateClick = () => {};
   const handleEventDragStop = (info) => {
-    console.log("dargging stop");
     const id = info.event.id;
     // Get the event and its location
     const event = info.event;
@@ -137,8 +123,24 @@ export default function Lobby({ recipes }) {
       console.error(error);
     }
   };
-  console.log("state recipes:", scheduledRecipes);
-  const handleEventReceive = (info) => {};
+  const handleEventReceive = (info) => {
+    // console.log("event recieved", info.event.extendedProps.ingredients);
+    const uniqueId = generateUniqueId();
+    const endTime = new Date(info.event.start);
+    endTime.setMinutes(endTime.getMinutes() + 30);
+
+    const newEvent = {
+      id: uniqueId,
+      recipeId: info.event.extendedProps.recipeId,
+      title: info.event.title,
+      start: info.event.start,
+      end: endTime,
+    };
+
+    if (!eventAlreadyExists(uniqueId)) {
+      setScheduledRecipes([...scheduledRecipes, newEvent]);
+    }
+  };
   const handleEventChange = (event) => {
     const newStartTime = event.event.start;
     const eventId = event.oldEvent.id;
@@ -148,6 +150,55 @@ export default function Lobby({ recipes }) {
         r.id === eventId ? { ...r, start: newStartTime } : r
       )
     );
+  };
+  const getRecipeById = (recipeId) => {
+    return recipes.find((recipe) => recipe._id === recipeId);
+  };
+
+  const handleSelectRange = async (info) => {
+    const { start, end } = info;
+    const eventsInRange = scheduledRecipes.filter((e) => {
+      const eventStart = new Date(e.start);
+      const eventEnd = new Date(e.end);
+      return eventStart >= start && eventEnd <= end;
+    });
+    // find recipes ids that are in range
+    const recipeIds = eventsInRange.map((e) => e.recipeId);
+
+    //fetch all the recipes based on those recipe ids when they are ready
+    const fetchRecipesByIds = async (ids) => {
+      try {
+        const recipePromises = ids.map((id) => getRecipeById(id)); // Replace fetchRecipeById with your actual data fetching function
+        const recipes = await Promise.all(recipePromises);
+        return recipes;
+      } catch (error) {
+        console.error("Error fetching recipes:", error);
+        throw error;
+      }
+    };
+
+    const fetchedRecipes = await fetchRecipesByIds(recipeIds);
+    // make a map to that adds the amount based on the name of ingredients
+    const consolidateIngredients = async (recipes) => {
+      const ingredientMap = new Map();
+
+      recipes.forEach((recipe) => {
+        recipe.ingredients.forEach(({ name, amount, unit }) => {
+          const key = `${name.toLowerCase()}-${unit.toLowerCase()}`;
+          if (ingredientMap.has(key)) {
+            ingredientMap.get(key).amount += amount; // Add to existing amount
+          } else {
+            ingredientMap.set(key, { name, amount, unit }); // Add new ingredient
+          }
+        });
+      });
+
+      return Array.from(ingredientMap.values());
+    };
+
+    const finalIngredients = await consolidateIngredients(fetchedRecipes);
+    //set context to pass to shoppingList.jsx
+    setShoppingList(finalIngredients);
   };
 
   return (
@@ -179,6 +230,7 @@ export default function Lobby({ recipes }) {
           droppable={true}
           editable={true}
           selectable={true}
+          select={handleSelectRange}
           eventChange={handleEventChange}
           events={scheduledRecipes}
           drop={handleDrop}
@@ -190,6 +242,7 @@ export default function Lobby({ recipes }) {
         style={{ color: "black", fontSize: 35, marginLeft: 35, marginTop: 250 }}
         id="external-delete-zone"
       />
+      <ShoppingList />
     </div>
   );
 }

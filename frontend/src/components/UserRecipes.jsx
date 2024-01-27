@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./styles/UserRecipes.css";
 import { Draggable } from "@fullcalendar/interaction";
+import Ingredients from "./Ingredients";
 
 export default function UserRecipes({ userRecipes, onRecipeSelect }) {
   const scrollContentRef = useRef(null);
@@ -21,7 +22,9 @@ export default function UserRecipes({ userRecipes, onRecipeSelect }) {
       itemSelector: ".recipe-card",
       eventData: function (eventEl) {
         let title = eventEl.getAttribute("title");
-        return { title: title };
+        let recipeId = eventEl.getAttribute("recipeid");
+
+        return { title: title, recipeId: recipeId };
       },
     });
   }, [userRecipes]);
@@ -53,10 +56,6 @@ export default function UserRecipes({ userRecipes, onRecipeSelect }) {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // const handleRecipeClick = (id) => {
-  //   console.log("recipe id", id);
-  // };
-
   return (
     <>
       <h4 className="userrecipes-heading">Your recipes</h4>
@@ -75,6 +74,7 @@ export default function UserRecipes({ userRecipes, onRecipeSelect }) {
             <div
               key={recipe._id}
               title={recipe.recipeName}
+              recipeid={recipe._id}
               className="recipe-card"
               onClick={() => onRecipeSelect(recipe._id)}
             >
