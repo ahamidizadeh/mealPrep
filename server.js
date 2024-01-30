@@ -8,6 +8,8 @@ import Ingredient from "./db/models/ingredientsModel.js";
 import { router as authRoutes } from "./routes/authRoutes.js";
 import { router as recipeRoutes } from "./routes/recipesRoutes.js";
 import { router as ingredientRoutes } from "./routes/ingredientRoutes.js";
+import { router as openAiRoutes } from "./routes/openAiRoutes.js";
+
 dotenv.config();
 connectDB();
 
@@ -19,6 +21,7 @@ app.use("/api/ingredients", ingredientRoutes);
 // app.get("/api/ingredients", async (req, res) => {
 //
 // });
+app.use(express.text());
 app.use(express.json());
 app.use(cors());
 app.post("/api", () => {
@@ -27,6 +30,7 @@ app.post("/api", () => {
 app.get("/", () => {
   console.log("server is getting something");
 });
+app.use("/api/ai", openAiRoutes);
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use("/api/auth", authRoutes);
 app.use("/api/recipes", recipeRoutes);

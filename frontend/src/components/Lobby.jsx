@@ -204,12 +204,12 @@ export default function Lobby({ recipes }) {
   return (
     <div className="lobby-container">
       {/* {" "} */}
-      {/* <div className="profile">
+      <div className="profile">
         <h3>welcome back, {username}! 🎉</h3>
         <button className="logout-btn" onClick={handleLogout}>
           Logout
         </button>
-      </div> */}
+      </div>
       <div className="recipes-container">
         <h2 className="lobby-heading-1">RECIPES</h2>
         <div className="recipe-section">
