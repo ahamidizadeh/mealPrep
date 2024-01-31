@@ -76,6 +76,3 @@ export async function login(req, res) {
     res.status(500).json({ error: "Internal Server Error" });
   }
 }
-export async function deleteBookedRecipe(req, res) {
-  console.log("trying to delte");
-}
