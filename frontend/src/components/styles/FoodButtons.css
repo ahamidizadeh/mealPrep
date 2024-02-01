@@ -1,0 +1,58 @@
+.food-container {
+  text-align: center;
+  height: 400px;
+  width: 600px;
+}
+
+.food-buttons {
+  overflow: scroll;
+  max-height: 250px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  top: 50px;
+}
+
+.food-buttons button {
+  color: white;
+  min-width: 120px;
+  max-width: 200px;
+  box-sizing: border-box;
+  padding: 20px 10px;
+  margin: 5px;
+  text-align: center;
+  text-overflow: ellipsis;
+  font-size: 1.5em;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  background-color: #7a503c;
+  border: solid 1px white;
+  border-radius: 25px;
+}
+.back-button {
+  color: white;
+  margin-top: 10px;
+  display: inline-block;
+  height: 30px;
+  width: 70px;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  background-color: #7a3d1f;
+  border: solid 0.4px;
+  border-radius: 5px;
+}
+.back-button:hover {
+  transform: scale(1.1);
+}
+.food-buttons button:hover {
+  background-color: #7a3d1f;
+  transform: scale(1.1);
+}
+.text-area {
+  height: 550px;
+  overflow: scroll;
+  font-size: 1.5em;
+  margin-top: 10px;
+  width: 600px;
+}

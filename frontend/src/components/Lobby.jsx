@@ -14,6 +14,8 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { useRecipes } from "../RecipeContext";
 import UserRecipes from "./UserRecipes.jsx";
 import ShoppingList from "./ShoppingList.jsx";
+import FoodButtons from "./FoodButtons.jsx";
+import Profile from "./Profile.jsx";
 
 export default function Lobby({ recipes }) {
   const { setSelectedRecipe, bookedRecipes, setShoppingList } = useRecipes();
@@ -79,9 +81,6 @@ export default function Lobby({ recipes }) {
     navigate(`/recipes/${id}`);
   };
 
-  const handleLogout = () => {
-    logout();
-  };
   const handleDrop = (info) => {};
 
   const handleDateClick = () => {};
@@ -203,52 +202,44 @@ export default function Lobby({ recipes }) {
 
   return (
     <div className="lobby-container">
-      {/* {" "} */}
-      <div className="profile">
-        <h3>welcome back, {username}! 🎉</h3>
-        <button className="logout-btn" onClick={handleLogout}>
-          Logout
-        </button>
+      <div className="leftSide">
+        <FoodButtons />
       </div>
-      <div className="recipes-container">
-        <h2 className="lobby-heading-1">RECIPES</h2>
-        <div className="recipe-section">
-          <UserRecipes
-            onRecipeSelect={handleSelectingRecipe}
-            userRecipes={filteredByUserRecipes}
-          />
-          <AllRecipes recipes={recipes} />
-        </div>
+      <div className="middle">
+        <UserRecipes
+          onRecipeSelect={handleSelectingRecipe}
+          userRecipes={filteredByUserRecipes}
+        />
+        <FullCalendar
+          headerToolbar={{
+            left: "prev,next today",
+            center: "title",
+            right: "dayGridMonth,timeGridWeek,timeGridDay",
+          }}
+          dateClick={handleDateClick}
+          plugins={[interactionPlugin, dayGridPlugin, timeGridPlugin]}
+          initialView="dayGridMonth"
+          droppable={true}
+          editable={true}
+          selectable={true}
+          select={handleSelectRange}
+          eventChange={handleEventChange}
+          events={scheduledRecipes}
+          drop={handleDrop}
+          eventDragStop={handleEventDragStop}
+          eventReceive={handleEventReceive}
+        />
+        <DeleteIcon
+          style={{
+            color: "black",
+            fontSize: 35,
+            marginLeft: 35,
+            marginTop: 250,
+          }}
+          id="external-delete-zone"
+        />
       </div>
-      <div className="mealprep-container">
-        <h2 className="lobby-heading-2">MEAL PREP</h2>
-        <div className="calendar-container">
-          <FullCalendar
-            headerToolbar={{
-              left: "prev,next today",
-              center: "title",
-              right: "dayGridMonth,timeGridWeek,timeGridDay",
-            }}
-            dateClick={handleDateClick}
-            plugins={[interactionPlugin, dayGridPlugin, timeGridPlugin]}
-            initialView="dayGridMonth"
-            droppable={true}
-            editable={true}
-            selectable={true}
-            select={handleSelectRange}
-            eventChange={handleEventChange}
-            events={scheduledRecipes}
-            drop={handleDrop}
-            eventDragStop={handleEventDragStop}
-            eventReceive={handleEventReceive}
-          />
-        </div>
-      </div>
-      <DeleteIcon
-        style={{ color: "black", fontSize: 35, marginLeft: 35, marginTop: 250 }}
-        id="external-delete-zone"
-      />
-      <div className="shopping-list-container">
+      <div className="rightSide">
         <h2 className="lobby-heading-3">SHOPPING LIST</h2>
         <ShoppingList />
       </div>

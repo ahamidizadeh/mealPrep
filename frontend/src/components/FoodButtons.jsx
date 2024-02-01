@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./styles/RecipeBuilder.css";
+import "./styles/FoodButtons.css";
 const cultures = [
   "Mexican",
   "Chinese",
@@ -668,6 +668,7 @@ export default function FoodButtons() {
   };
   return (
     <div className="food-container">
+      <h2>Menu</h2>
       <div className="food-buttons">
         {buttonsState.map((culture, i) => (
           <button onClick={handleCultureClick} value={culture} key={i}>
@@ -680,6 +681,67 @@ export default function FoodButtons() {
           go back
         </button>
       )}
+      <div className="recipe-information">
+        <div className="text-area">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui quis
+          impedit nisi perspiciatis quos eos consequatur voluptate, similique
+          aspernatur. Veniam esse autem neque magni possimus totam deserunt
+          asperiores quis maxime! Odio eum unde nostrum quae libero excepturi
+          aliquid non, quibusdam eius commodi iusto qui saepe iste? Illum quos
+          itaque sapiente mollitia maxime, animi accusamus earum? Sapiente,
+          aperiam, inventore commodi fugit eligendi officia esse sunt ut non
+          rerum libero repudiandae culpa natus ipsa blanditiis aut beatae at
+          sint quae, cumque dicta. Rem provident optio corporis! Commodi,
+          suscipit! Dolores sint enim quod fugiat sapiente quia officiis facilis
+          sequi excepturi, voluptatum voluptate pariatur ducimus ad dolorem
+          ratione in optio molestiae tempore quo. Optio ut accusantium beatae,
+          laudantium amet hic itaque temporibus asperiores delectus tenetur
+          quasi explicabo voluptas. Ut, pariatur eos doloribus distinctio
+          aspernatur temporibus nulla veniam! Voluptatum quae hic porro, animi
+          neque suscipit architecto aut in vero, temporibus necessitatibus natus
+          atque numquam sed quam libero, consequatur deserunt iste sapiente. A,
+          fuga obcaecati? Quasi iure quidem ipsa, eaque soluta eius nesciunt
+          quibusdam dicta nemo exercitationem molestias cupiditate omnis
+          corrupti temporibus doloribus quis excepturi odio architecto
+          dignissimos sapiente facilis commodi libero perspiciatis eligendi.
+          Consequuntur ratione sapiente placeat, aspernatur, expedita labore ad
+          nostrum odio modi vel velit nam nobis eum rerum obcaecati, sequi
+          tempora voluptatem laudantium deleniti id aliquid dignissimos cum?
+          Minima, reiciendis inventore debitis consequatur maiores fugiat eos
+          corporis quam ullam necessitatibus officiis culpa magnam nesciunt eum
+          animi eveniet quidem repudiandae nemo molestiae? Qui pariatur fugit
+          blanditiis assumenda dicta nobis. Asperiores natus ipsa similique
+          exercitationem, perferendis explicabo in facere cumque! Architecto
+          deleniti neque sit aliquam illum enim totam molestias nulla nobis
+          veniam officia minima esse hic quo similique eum cum illo, velit
+          optio. Molestias deleniti labore nulla tempora quisquam maiores alias!
+          Laborum ad, itaque esse vel, quia fugit accusamus molestias enim
+          facere quae alias architecto. Rem dolor minima obcaecati possimus
+          explicabo facilis neque libero laboriosam modi veniam debitis vel
+          blanditiis, sequi quam nemo ducimus. Ratione reprehenderit consequatur
+          error quia in, ducimus distinctio eaque vero aut animi voluptatibus
+          tempora! Nesciunt aspernatur temporibus rem sequi recusandae ab totam,
+          magni deleniti quasi culpa, sunt odit reiciendis ipsam provident!
+          Expedita enim temporibus quibusdam ex necessitatibus nesciunt
+          consequuntur eius commodi, perferendis, neque iure ullam illum
+          aspernatur aut doloremque ducimus iusto tenetur deserunt quis quasi
+          incidunt sequi sapiente! Molestiae, tempore. Mollitia autem non ex
+          illo dicta. Culpa illum natus repellendus quisquam facilis tenetur
+          eveniet minus temporibus quas? A voluptas minima perspiciatis unde
+          qui, debitis fuga eveniet earum quae culpa eum magnam quis quas
+          suscipit veniam nostrum laborum adipisci. Eligendi maxime delectus
+          exercitationem, deleniti ab nam voluptatum reprehenderit accusantium
+          rerum nulla beatae molestiae veniam provident dolores perspiciatis
+          quis sint nostrum voluptas dignissimos aspernatur culpa eaque tempora
+          odit consequuntur. Neque itaque vitae amet rem exercitationem ipsa ex
+          perferendis corrupti ab delectus dolor eius illum unde animi, repellat
+          iure eaque nostrum laudantium inventore placeat minima quasi
+          voluptatum recusandae assumenda? Nisi culpa tenetur temporibus
+          doloribus iste ullam, iusto facere! Facere recusandae dicta culpa
+          laborum consequuntur fugit repudiandae officia placeat earum
+          architecto, blanditiis nemo saepe. Ullam.
+        </div>
+      </div>
     </div>
   );
 }
