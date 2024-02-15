@@ -1,0 +1,41 @@
+.food-background {
+  background-color: black;
+  height: 100vh;
+  margin: 0;
+  position: relative;
+  background-image: url(../../../public/images/backgrounds-mamani.jpeg);
+  position: relative;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.hole {
+  position: absolute;
+  top: 370px;
+  left: 300px;
+  width: 450px;
+  height: 450px;
+  border-radius: 60%;
+  background-color: white;
+}
+.carousel {
+  display: flex;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  align-items: center;
+  text-align: center;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  height: 80%;
+  background-color: blue;
+  justify-content: center;
+  align-items: center;
+}
+.country-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  width: 100px;
+  text-align: center;
+}

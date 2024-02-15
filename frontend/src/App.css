@@ -1,3 +1,5 @@
 body {
   background-color: beige;
+  overflow-x: hidden;
+  margin: 0;
 }

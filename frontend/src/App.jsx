@@ -15,7 +15,7 @@ function App() {
 
   return (
     <>
-      {authToken && <Navbar />}
+      {/* {authToken && <Navbar />} */}
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route

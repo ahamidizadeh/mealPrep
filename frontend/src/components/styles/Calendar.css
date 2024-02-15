@@ -1,4 +1,4 @@
-.fc {
+/* .fc {
   background-color: beige;
   height: 500px;
   border-radius: 10px;
@@ -15,5 +15,34 @@
 /* .fc-event-main {
   cursor: move;
 } */
-.fc-daygrid-day-frame .fc-scrollgrid-sync-inner {
+/* .fc-daygrid-day-frame .fc-scrollgrid-sync-inner {
+} */
+
+.calendar-container-bg {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.calendar-clock-container {
+  width: 700px;
+  height: 700px;
+  text-align: center;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1px;
+}
+.svg-bg {
+  /* background-color: rgb(179, 98, 98); */
+  padding: 120px;
+}
+.info-container {
+  background-color: blueviolet;
+  position: absolute;
+}
+.clock-hours {
+  background-color: purple;
 }

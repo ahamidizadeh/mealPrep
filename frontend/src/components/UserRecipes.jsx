@@ -58,7 +58,7 @@ export default function UserRecipes({ userRecipes, onRecipeSelect }) {
 
   return (
     <>
-      <h4 className="userrecipes-heading">Your recipes</h4>
+      <h1 className="userrecipes-heading">Your recipes</h1>
       <div className="user-recipes" id="draggable-recipes">
         {canScrollLeft && (
           <div className="scroll-pointer left-pointer" onClick={scrollLeft}>

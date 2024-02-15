@@ -8,21 +8,28 @@ import interactionPlugin from "@fullcalendar/interaction";
 import { debounce } from "lodash";
 import "./styles/UserRecipes.css";
 import "./styles/Calendar.css";
+import PersonIcon from "@mui/icons-material/Person";
 import "./styles/Lobby.css";
+import ManageSearchIcon from "@mui/icons-material/ManageSearch";
 import { useAuthContext } from "../AuthContext.jsx";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useRecipes } from "../RecipeContext";
+import Recipes from "./Recipes.jsx";
 import UserRecipes from "./UserRecipes.jsx";
 import ShoppingList from "./ShoppingList.jsx";
 import FoodButtons from "./FoodButtons.jsx";
 import Profile from "./Profile.jsx";
+import RecipeDetails from "./RecipeDetails.jsx";
 
 export default function Lobby({ recipes }) {
   const { setSelectedRecipe, bookedRecipes, setShoppingList } = useRecipes();
   const [scheduledRecipes, setScheduledRecipes] = useState([]);
+  const [hoverDelay, setHoverDelay] = useState(null);
+  const [hoveredRecipe, setHoveredRecipe] = useState(null);
   const { logout, id, username } = useAuthContext();
 
   const navigate = useNavigate();
+
   const scheduleRecipes = async (data, userId) => {
     try {
       if (userId) {
@@ -47,27 +54,30 @@ export default function Lobby({ recipes }) {
       console.error("Error:", error);
     }
   };
+  const handleHover = (recipe) => {
+    setHoveredRecipe(recipe);
+  };
 
   const debouncedSaveData = debounce(() => {
     scheduleRecipes(scheduledRecipes, id);
   }, 4000);
 
-  useEffect(() => {
-    debouncedSaveData();
+  // useEffect(() => {
+  //   debouncedSaveData();
 
-    // Cleanup
-    return () => {
-      debouncedSaveData.cancel();
-    };
-  }, []);
+  //   // Cleanup
+  //   return () => {
+  //     debouncedSaveData.cancel();
+  //   };
+  // }, []);
 
-  useEffect(() => {
-    setScheduledRecipes(bookedRecipes);
-  }, [bookedRecipes]);
+  // useEffect(() => {
+  //   setScheduledRecipes(bookedRecipes);
+  // }, [bookedRecipes]);
 
-  const filteredByUserRecipes = recipes.filter(
-    (recipe) => recipe.userId === id
-  );
+  // const filteredByUserRecipes = recipes.filter(
+  //   (recipe) => recipe.userId === id
+  // );
 
   const generateUniqueId = () => {
     return `${Date.now()}-${Math.floor(Math.random() * 10000)}`;
@@ -201,48 +211,102 @@ export default function Lobby({ recipes }) {
   };
 
   return (
-    <div className="lobby-container">
-      <div className="leftSide">
-        <FoodButtons />
-      </div>
-      <div className="middle">
-        <UserRecipes
-          onRecipeSelect={handleSelectingRecipe}
-          userRecipes={filteredByUserRecipes}
-        />
-        <FullCalendar
-          headerToolbar={{
-            left: "prev,next today",
-            center: "title",
-            right: "dayGridMonth,timeGridWeek,timeGridDay",
-          }}
-          dateClick={handleDateClick}
-          plugins={[interactionPlugin, dayGridPlugin, timeGridPlugin]}
-          initialView="dayGridMonth"
-          droppable={true}
-          editable={true}
-          selectable={true}
-          select={handleSelectRange}
-          eventChange={handleEventChange}
-          events={scheduledRecipes}
-          drop={handleDrop}
-          eventDragStop={handleEventDragStop}
-          eventReceive={handleEventReceive}
-        />
-        <DeleteIcon
-          style={{
-            color: "black",
-            fontSize: 35,
-            marginLeft: 35,
-            marginTop: 250,
-          }}
-          id="external-delete-zone"
-        />
-      </div>
-      <div className="rightSide">
-        <h2 className="lobby-heading-3">SHOPPING LIST</h2>
-        <ShoppingList />
-      </div>
+    <div className="lobby-cnt">
+      <header>
+        <div className="header-content">
+          <div className="spacer-25"></div>
+          <div>MaMani's Kitchen</div>
+          <div className="spacer-48"></div>
+          <div className="input-container">
+            <div className="spacer-18"></div>
+            <div className="search-icon">
+              <ManageSearchIcon style={{ fontSize: "20px" }} />
+            </div>
+            <input
+              className="input-search"
+              placeholder="search for recipes"
+            ></input>
+            <div className="spacer-35"></div>
+          </div>
+          <div className="spacer-48"></div>
+          <div className="header-btns">
+            <a className="login-link">
+              <PersonIcon />
+              <div className="spacer-4"></div>
+              Login
+            </a>
+
+            <a className="login-link">
+              <div>Sign up</div>
+            </a>
+          </div>
+        </div>
+      </header>
+      <main className="main-content">
+        <div className="filter-search">
+          <div className="filter-buttons">
+            <button className="button-filter">
+              <img
+                className="logo-filter"
+                src="../../public/images/chinese.webp"
+              ></img>
+            </button>
+            <button className="button-filter">Italian</button>
+            <button className="button-filter">Easy Recipes</button>
+          </div>
+          <div className="filter-prefrence">
+            <button className="button-filter">Vegan</button>
+            <button className="button-filter">nut free</button>
+            <button className="button-filter">under 30mins</button>
+          </div>
+        </div>
+        <div className="recipes-display">
+          <Recipes onHover={handleHover} recipes={recipes} />
+          <RecipeDetails recipe={hoveredRecipe} />
+        </div>
+      </main>
     </div>
+    // <div className="lobby-container">
+    //   <div className="leftSide">
+    //     <FoodButtons />
+    //   </div>
+    //   <div className="middle">
+    //     <UserRecipes
+    //       onRecipeSelect={handleSelectingRecipe}
+    //       userRecipes={filteredByUserRecipes}
+    //     />
+    //     <FullCalendar
+    //       headerToolbar={{
+    //         left: "prev,next today",
+    //         center: "title",
+    //         right: "dayGridMonth,timeGridWeek,timeGridDay",
+    //       }}
+    //       dateClick={handleDateClick}
+    //       plugins={[interactionPlugin, dayGridPlugin, timeGridPlugin]}
+    //       initialView="dayGridMonth"
+    //       droppable={true}
+    //       editable={true}
+    //       selectable={true}
+    //       select={handleSelectRange}
+    //       eventChange={handleEventChange}
+    //       events={scheduledRecipes}
+    //       drop={handleDrop}
+    //       eventDragStop={handleEventDragStop}
+    //       eventReceive={handleEventReceive}
+    //     />
+    //     <DeleteIcon
+    //       style={{
+    //         color: "black",
+    //         fontSize: 35,
+    //         marginLeft: 35,
+    //         marginTop: 250,
+    //       }}
+    //       id="external-delete-zone"
+    //     />
+    //   </div>
+    //   <div className="rightSide">
+    //     <ShoppingList />
+    //   </div>
+    // </div>
   );
 }

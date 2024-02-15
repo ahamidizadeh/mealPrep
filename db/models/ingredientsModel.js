@@ -7,32 +7,32 @@ const ingredientSchema = new mongoose.Schema({
   },
   category: {
     type: String,
-    required: true,
+    // required: true,
   },
   units: {
     type: String,
-    required: true,
+    required: false,
   },
   calories: {
     type: Number,
-    required: true,
+    // required: true,
   },
   imageURL: {
     type: String,
-    required: true,
+    // required: true,
   },
   macros: {
     fat: {
       type: Number,
-      required: true,
+      // required: true,
     },
     protein: {
       type: Number,
-      required: true,
+      // required: true,
     },
     carbs: {
       type: Number,
-      required: true,
+      // required: true,
     },
   },
 });

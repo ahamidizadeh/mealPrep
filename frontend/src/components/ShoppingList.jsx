@@ -7,7 +7,7 @@ export default function ShoppingList() {
   console.log("shopping list:", shoppingList);
   return (
     <div className="ingredients-shopping-list">
-      <h2 className="list-heading">shopping list</h2>
+      <h1 className="list-heading">shopping list</h1>
       <div className="shopping-ingredients">
         {shoppingList.map((item) => (
           <li>

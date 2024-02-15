@@ -1,55 +1,59 @@
-// // Calendar.jsx
-// import React, { useState } from "react";
-// import FullCalendar from "@fullcalendar/react";
-// import dayGridPlugin from "@fullcalendar/daygrid";
-// import timeGridPlugin from "@fullcalendar/timegrid";
-// import interactionPlugin from "@fullcalendar/interaction";
-// import "./styles/Calendar.css";
+import React, { useState } from "react";
+import "./styles/Calendar.css";
+export default function Calendar() {
+  const [selectedTime, setSelectedTime] = useState("");
+  const radius = 300; // Radius of the circle
+  const diameter = radius * 2;
+  const circumference = diameter * Math.PI;
 
-// const AppCalendar = ({ droppedRecipes, onRecipeRecieve }) => {
-//   // const handleDrop = (dropInfo) => {
-//   //   console.log("dropped");
-//   //   console.log("dropped item:", dropInfo.event);
-//   // };
-//   const handleEventReceive = (info) => {
-//     console.log("Received event:", info.event);
+  // Function to calculate the position of each hour
+  const calculatePosition = (hour, index, totalHours) => {
+    const theta = ((2 * Math.PI) / totalHours) * index; // Angle for the hour
+    const x = radius + radius * Math.cos(theta);
+    const y = radius + radius * Math.sin(theta);
+    return { x, y };
+  };
 
-//     // const receivedEvent = {
-//     //   title: info.draggedEl.title,
-//     //   start: info.start,
-//     //   end: info.end,
-//     // };
-//     // // ... other properties
-//     // onRecipeRecieve(receivedEvent);
-//   };
+  // Function to handle time selection
+  const handleSelectTime = (time) => {
+    setSelectedTime(time);
+  };
 
-//   // const handleDateClick = () => {
-//   //   console.log("clicking dates");
-//   // };
-
-//   // return (
-//   //   <div className="calendar-container">
-//   //     <FullCalendar
-//   //       headerToolbar={{
-//   //         left: "prev,next today",
-//   //         center: "title",
-//   //         right: "dayGridMonth,timeGridWeek,timeGridDay",
-//   //       }}
-//   //       dateClick={handleDateClick}
-//   //       plugins={[interactionPlugin, dayGridPlugin, timeGridPlugin]}
-//   //       initialView="dayGridMonth"
-//   //       droppable={true}
-//   //       editable={true}
-//   //       selectable={true}
-//   //       selectMirror={true}
-//   //       events={droppedRecipes}
-//   //       drop={() => {
-//   //         console.log("dropping");
-//   //       }}
-//   //       eventReceive={() => handleEventReceive()}
-//   //     />
-//   //   </div>
-// //   );
-// // };
-
-// export default AppCalendar;
+  return (
+    <div className="calendar-clock-container">
+      <svg
+        width={diameter}
+        height={diameter}
+        className="svg-bg"
+        viewBox={`-10 -10 ${diameter + 30} ${diameter + 30}`}
+      >
+        {[...Array(24)].map((_, index) => {
+          // For 24 hours
+          const { x, y } = calculatePosition(_, index, 24);
+          return (
+            <text
+              key={index}
+              x={x}
+              y={y}
+              fontSize="16"
+              textAnchor="middle"
+              alignmentBaseline="middle"
+              style={{ cursor: "pointer" }}
+              className="clock-hours"
+              onClick={() => handleSelectTime(`${index}:00`)}
+            >
+              {`${index}:00`}
+            </text>
+          );
+        })}
+      </svg>
+      <div className="info-container">
+        <div>
+          Date and Month:{" "}
+          <input type="date" onChange={(e) => console.log(e.target.value)} />
+        </div>
+        <div>Selected Time: {selectedTime}</div>
+      </div>
+    </div>
+  );
+}

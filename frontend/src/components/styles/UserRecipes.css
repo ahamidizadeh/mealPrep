@@ -34,17 +34,7 @@
   right: 0;
   top: 72px;
 }
-h4.userrecipes-heading {
-  border-radius: 5px;
-  background-color: orange;
-  padding: 0;
-  margin-left: 5px;
-  width: 100px;
-  text-align: center;
-  height: fit-content;
-  margin-top: 5px;
-  margin-bottom: 5px;
-}
+
 .recipe-card {
   cursor: move;
   min-width: 75px;
