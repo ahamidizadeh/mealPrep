@@ -29,7 +29,7 @@ export default function CustomCalendarModal({
               src={`../../public/images/${recipe.name}.jpeg`}
               alt="recipe"
             ></img>
-            <h4>{recipe.name}</h4>
+            <div className="recipe-name">{recipe.name}</div>
           </div>
         ) : null}
         <div className="calendar-container">

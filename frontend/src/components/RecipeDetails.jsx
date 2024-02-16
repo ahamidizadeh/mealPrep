@@ -17,7 +17,7 @@ export default function RecipeDetails({ recipe }) {
   //   imageURL: ingredients.find((i) => i._id === ing.ingredient)?.imageURL,
   // }));
   // console.log("resolved:", resolvedIngredients);
-  console.log("recipe:", recipe);
+
   return recipe ? (
     <div className="details-container">
       <div className="recipe-image-bg">
@@ -48,7 +48,7 @@ export default function RecipeDetails({ recipe }) {
     </div>
   ) : (
     <div className="default-image">
-      <img src="../../public/images/background-mamani.jpeg"></img>
+      <img src="/images/background-mamani.jpeg"></img>
     </div>
   );
   // <div className="recipe-details-container">

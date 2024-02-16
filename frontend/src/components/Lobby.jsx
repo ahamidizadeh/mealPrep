@@ -1,10 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import AllRecipes from "./AllRecipes.jsx";
-import FullCalendar from "@fullcalendar/react";
-import dayGridPlugin from "@fullcalendar/daygrid";
-import timeGridPlugin from "@fullcalendar/timegrid";
-import interactionPlugin from "@fullcalendar/interaction";
 import { debounce } from "lodash";
 import "./styles/UserRecipes.css";
 import "./styles/Calendar.css";
@@ -12,13 +7,8 @@ import PersonIcon from "@mui/icons-material/Person";
 import "./styles/Lobby.css";
 import ManageSearchIcon from "@mui/icons-material/ManageSearch";
 import { useAuthContext } from "../AuthContext.jsx";
-import DeleteIcon from "@mui/icons-material/Delete";
 import { useRecipes } from "../RecipeContext";
 import Recipes from "./Recipes.jsx";
-import UserRecipes from "./UserRecipes.jsx";
-import ShoppingList from "./ShoppingList.jsx";
-import FoodButtons from "./FoodButtons.jsx";
-import Profile from "./Profile.jsx";
 import RecipeDetails from "./RecipeDetails.jsx";
 
 export default function Lobby({ recipes }) {
@@ -243,14 +233,18 @@ export default function Lobby({ recipes }) {
         </div>
       </header>
       <main className="main-content">
-        <div className="filter-search">
+        {/* <div className="filter-search">
           <div className="filter-buttons">
-            <button className="button-filter">
-              <img
-                className="logo-filter"
-                src="../../public/images/chinese.webp"
-              ></img>
-            </button>
+            <button className="button-filter">Italian</button>
+            <button className="button-filter">Easy Recipes</button>
+            <button className="button-filter">Easy Recipes</button>
+            <button className="button-filter">Easy Recipes</button>
+            <button className="button-filter">Easy Recipes</button>
+            <button className="button-filter">Easy Recipes</button>
+            <button className="button-filter">Easy Recipes</button>
+            <button className="button-filter">Easy Recipes</button>
+            <button className="button-filter">Easy Recipes</button>
+            <button className="button-filter">Easy Recipes</button>
             <button className="button-filter">Italian</button>
             <button className="button-filter">Easy Recipes</button>
           </div>
@@ -258,55 +252,33 @@ export default function Lobby({ recipes }) {
             <button className="button-filter">Vegan</button>
             <button className="button-filter">nut free</button>
             <button className="button-filter">under 30mins</button>
+            <button className="button-filter">Vegan</button>
+            <button className="button-filter">nut free</button>
+            <button className="button-filter">under 30mins</button>
+            <button className="button-filter">Vegan</button>
+            <button className="button-filter">nut free</button>
+            <button className="button-filter">under 30mins</button>
+            <button className="button-filter">Vegan</button>
+            <button className="button-filter">nut free</button>
+            <button className="button-filter">under 30mins</button>
+            <button className="button-filter">Vegan</button>
+            <button className="button-filter">nut free</button>
+            <button className="button-filter">under 30mins</button>
           </div>
-        </div>
+        </div> */}
         <div className="recipes-display">
+          <div className="filter-prefrence">
+            <button className="button-filter">Vegan</button>
+            <button className="button-filter">nut free</button>
+            <button className="button-filter">under 30mins</button>
+            <button className="button-filter">Vegan</button>
+            <button className="button-filter">nut free</button>
+            <button className="button-filter">under 30mins</button>
+          </div>
           <Recipes onHover={handleHover} recipes={recipes} />
           <RecipeDetails recipe={hoveredRecipe} />
         </div>
       </main>
     </div>
-    // <div className="lobby-container">
-    //   <div className="leftSide">
-    //     <FoodButtons />
-    //   </div>
-    //   <div className="middle">
-    //     <UserRecipes
-    //       onRecipeSelect={handleSelectingRecipe}
-    //       userRecipes={filteredByUserRecipes}
-    //     />
-    //     <FullCalendar
-    //       headerToolbar={{
-    //         left: "prev,next today",
-    //         center: "title",
-    //         right: "dayGridMonth,timeGridWeek,timeGridDay",
-    //       }}
-    //       dateClick={handleDateClick}
-    //       plugins={[interactionPlugin, dayGridPlugin, timeGridPlugin]}
-    //       initialView="dayGridMonth"
-    //       droppable={true}
-    //       editable={true}
-    //       selectable={true}
-    //       select={handleSelectRange}
-    //       eventChange={handleEventChange}
-    //       events={scheduledRecipes}
-    //       drop={handleDrop}
-    //       eventDragStop={handleEventDragStop}
-    //       eventReceive={handleEventReceive}
-    //     />
-    //     <DeleteIcon
-    //       style={{
-    //         color: "black",
-    //         fontSize: 35,
-    //         marginLeft: 35,
-    //         marginTop: 250,
-    //       }}
-    //       id="external-delete-zone"
-    //     />
-    //   </div>
-    //   <div className="rightSide">
-    //     <ShoppingList />
-    //   </div>
-    // </div>
   );
 }

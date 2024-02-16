@@ -44,7 +44,7 @@ export default function RecipeItem({ recipe }) {
     >
       {isHovered ? (
         <div className="button-display">
-          <button onClick={() => handleOpen(recipe)}>Book it</button>
+          <button onClick={() => handleOpen(recipe)}>Add Calendar</button>
           <button>Shop ingredients</button>
         </div>
       ) : (

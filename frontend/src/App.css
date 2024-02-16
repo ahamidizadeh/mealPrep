@@ -1,5 +1,14 @@
 body {
-  background-color: beige;
   overflow-x: hidden;
+  overflow-y: hidden;
   margin: 0;
+}
+* {
+  margin: 0;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
 }

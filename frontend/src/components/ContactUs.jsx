@@ -5,6 +5,7 @@ import AllRecipes from "./AllRecipes.jsx";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
+import resourceTimelinePlugin from "@fullcalendar/resource-timeline";
 import interactionPlugin from "@fullcalendar/interaction";
 import { debounce } from "lodash";
 import "./styles/UserRecipes.css";
@@ -857,9 +858,15 @@ export default function Contact({ recipes }) {
             center: "title",
             right: "dayGridMonth,timeGridWeek,timeGridDay",
           }}
+          timeZone="UTC"
           dateClick={handleDateClick}
-          plugins={[interactionPlugin, dayGridPlugin, timeGridPlugin]}
-          initialView="dayGridMonth"
+          plugins={[
+            interactionPlugin,
+            dayGridPlugin,
+            timeGridPlugin,
+            resourceTimelinePlugin,
+          ]}
+          initialView={"resourceTimelineDay"}
           droppable={true}
           editable={true}
           selectable={true}

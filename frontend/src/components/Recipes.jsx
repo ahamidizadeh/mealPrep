@@ -32,7 +32,51 @@ export default function Recipes({ recipes, onHover }) {
     <div className="main-recipes">
       <div className="category-food">
         <section>
-          <div>
+          <div className="header-recipe-row">
+            <h1>Italian</h1>
+          </div>
+          <div className="recipes-lobby">
+            {listItalian.map((group, i) => (
+              <ul className="list-recipe" key={i}>
+                {group.map((recipe, i) => (
+                  <li
+                    onMouseEnter={() => handleHover(recipe)}
+                    onMouseLeave={handleMouseLeave}
+                    key={i}
+                  >
+                    <RecipeItem hoverTime={hoverTimeOut} recipe={recipe} />
+                  </li>
+                ))}
+              </ul>
+            ))}
+          </div>
+        </section>
+      </div>
+      <div className="category-food">
+        <section>
+          <div className="header-recipe-row">
+            <h1>Italian</h1>
+          </div>
+          <div className="recipes-lobby">
+            {listItalian.map((group, i) => (
+              <ul className="list-recipe" key={i}>
+                {group.map((recipe, i) => (
+                  <li
+                    onMouseEnter={() => handleHover(recipe)}
+                    onMouseLeave={handleMouseLeave}
+                    key={i}
+                  >
+                    <RecipeItem hoverTime={hoverTimeOut} recipe={recipe} />
+                  </li>
+                ))}
+              </ul>
+            ))}
+          </div>
+        </section>
+      </div>
+      <div className="category-food">
+        <section>
+          <div className="header-recipe-row">
             <h1>Italian</h1>
           </div>
           <div className="recipes-lobby">
