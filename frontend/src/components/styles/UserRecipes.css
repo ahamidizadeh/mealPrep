@@ -37,22 +37,21 @@
 
 .recipe-card {
   cursor: move;
-  min-width: 75px;
-  min-height: 125px; /* Adjust the width of the card */
+  width: 105px;
+  height: 125px;
+  padding: 10px;
+  margin: 0;
   justify-content: center;
-  flex-direction: column;
-  border-radius: 10px; /* Round edges */
-  overflow: hidden; /* Ensures the image and content respect the border-radius */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: adds shadow for depth */
-  background-color: #fff; /* Background color of the card */
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
 }
 
-.recipe-image {
-  width: 75px;
-  height: 50%; /* Adjust the height of the image */
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
+.recipe-image > img {
+  width: 50px;
+  border-radius: 10%;
+  margin-bottom: 15px; /* Adjust the height of the image */
 }
 
 .recipe-info {

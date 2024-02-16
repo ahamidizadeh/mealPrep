@@ -15,7 +15,7 @@ export default function UserRecipes({ userRecipes, onRecipeSelect }) {
       setCanScrollRight(scrollLeft < scrollWidth - clientWidth);
     }
   };
-
+  console.log("user recipes", userRecipes);
   useEffect(() => {
     let draggableEl = document.getElementById("draggable-recipes");
     new Draggable(draggableEl, {
@@ -73,19 +73,16 @@ export default function UserRecipes({ userRecipes, onRecipeSelect }) {
           {userRecipes.map((recipe) => (
             <div
               key={recipe._id}
-              title={recipe.recipeName}
+              title={recipe.title}
               recipeid={recipe._id}
               className="recipe-card"
               onClick={() => onRecipeSelect(recipe._id)}
             >
-              <div
-                className="recipe-image"
-                style={{
-                  backgroundImage: `url(http://localhost:1234/${recipe.image})`,
-                }}
-              ></div>
+              <div className="recipe-image">
+                <img src={`../../public/images/${recipe.title}.jpeg`}></img>
+              </div>
               <div className="recipe-info">
-                <h4 className="recipe-name">{recipe.recipeName}</h4>
+                <h4 className="recipe-name">{recipe.title}</h4>
               </div>
             </div>
           ))}

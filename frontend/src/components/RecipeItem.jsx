@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
+import CustomCalendarModal from "./modal/ModalCalendar";
 
 export default function RecipeItem({ recipe }) {
   const [isHovered, setIsHovered] = useState(false);
+  const [selectedRecipe, setSelectedRecipe] = useState(null);
+  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
   const [hoverTimeoutId, setHoverTimeoutId] = useState(null);
 
   // Clear the timeout if component unmounts while hover is delayed
@@ -25,6 +28,14 @@ export default function RecipeItem({ recipe }) {
     if (hoverTimeoutId) clearTimeout(hoverTimeoutId);
     setIsHovered(false);
   };
+
+  const handleOpen = (recipe) => {
+    setSelectedRecipe(recipe);
+    setIsCalendarOpen(true);
+  };
+  const handleClose = () => {
+    setIsCalendarOpen(false);
+  };
   return (
     <div
       className="item-bg"
@@ -33,7 +44,7 @@ export default function RecipeItem({ recipe }) {
     >
       {isHovered ? (
         <div className="button-display">
-          <button>Book it</button>
+          <button onClick={() => handleOpen(recipe)}>Book it</button>
           <button>Shop ingredients</button>
         </div>
       ) : (
@@ -47,6 +58,11 @@ export default function RecipeItem({ recipe }) {
           </div>
         </div>
       )}
+      <CustomCalendarModal
+        recipe={selectedRecipe}
+        onRequestClose={handleClose}
+        isOpen={isCalendarOpen}
+      />
     </div>
   );
 }

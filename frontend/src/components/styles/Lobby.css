@@ -156,7 +156,6 @@
 .item-bg {
   cursor: pointer;
   width: 125px;
-  z-index: 100;
   position: relative;
   padding: 20px;
   background: linear-gradient(to bottom right, #f8f9fa, #e9ecef);

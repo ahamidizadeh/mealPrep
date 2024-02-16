@@ -1,6 +1,7 @@
-/* .fc {
+.fc {
   background-color: beige;
   height: 500px;
+  width: 1000px;
   border-radius: 10px;
 }
 
@@ -12,37 +13,54 @@
 .fc .fc-daygrid-day-frame {
   min-height: 100px;
 }
-/* .fc-event-main {
-  cursor: move;
-} */
-/* .fc-daygrid-day-frame .fc-scrollgrid-sync-inner {
-} */
 
-.calendar-container-bg {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
 .calendar-clock-container {
-  width: 700px;
-  height: 700px;
   text-align: center;
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1px;
 }
 .svg-bg {
   /* background-color: rgb(179, 98, 98); */
-  padding: 120px;
+
+  transform: scale(1.5);
 }
 .info-container {
-  background-color: blueviolet;
+  top: 240px;
+  margin: 10px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
   position: absolute;
 }
-.clock-hours {
-  background-color: purple;
+.circle-container {
+  fill: olive;
+  stroke: white;
+  stroke-width: 0.7;
+  transform-origin: center;
+  transition: transform, fill;
+}
+.circle-container:hover {
+  fill: goldenrod;
+  stroke: white;
+  stroke-width: 1;
+  cursor: pointer;
+  transform: scale(1.03);
+}
+.save-modal-btn {
+  position: absolute;
+  top: 525px;
+  right: -170px;
+
+  width: 150px;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  background-color: olivedrab;
+  border: none;
+  border-radius: 20px;
+  height: 50px;
+}
+.save-modal-btn:hover {
+  cursor: pointer;
+  transform: scale(1.04);
 }

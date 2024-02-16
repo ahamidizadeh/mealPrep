@@ -199,7 +199,7 @@ async function saveRecipeManually() {
     console.log(error);
   }
 }
-saveRecipeManually();
+// saveRecipeManually();
 
 export async function saveRecipe(req, res) {
   try {
@@ -286,18 +286,19 @@ export async function bookRecipes(req, res) {
       return res.status(404).send("User not found");
     }
 
-    scheduledRecipes.forEach((newRecipe) => {
-      const isDuplicate = user.bookedRecipes.some(
-        (existingRecipe) =>
-          existingRecipe.id === newRecipe.id &&
-          existingRecipe.start === newRecipe.start &&
-          existingRecipe.end === newRecipe.end
-      );
+    user.bookedRecipes.push(scheduledRecipes);
+    // scheduledRecipes.forEach((newRecipe) => {
+    //   const isDuplicate = user.bookedRecipes.some(
+    //     (existingRecipe) =>
+    //       existingRecipe.id === newRecipe.id &&
+    //       existingRecipe.start === newRecipe.start &&
+    //       existingRecipe.end === newRecipe.end
+    //   );
 
-      if (!isDuplicate) {
-        user.bookedRecipes.push(newRecipe);
-      }
-    });
+    //   if (!isDuplicate) {
+    //     user.bookedRecipes.push(newRecipe);
+    //   }
+    // });
     await user.save();
     console.log("recipe booked!");
     res.status(200).json({ message: "Booked recipes added successfully" });

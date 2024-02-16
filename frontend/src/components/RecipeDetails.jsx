@@ -28,8 +28,8 @@ export default function RecipeDetails({ recipe }) {
           <h1>{recipe.name}</h1>
         </div>
         <div className="ingredients-details-bg">
-          {recipe.ingredients.map((ing) => (
-            <li>
+          {recipe.ingredients.map((ing, i) => (
+            <li key={i}>
               {ing.name}
               {"-"}
               {ing.amount} {ing.unit}

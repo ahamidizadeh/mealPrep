@@ -1,0 +1,53 @@
+.my-calendar {
+  position: relative;
+  background: whitesmoke;
+  flex-wrap: wrap;
+  display: flex;
+  height: 750px;
+  width: 750px;
+  justify-content: center;
+  align-items: center;
+  overflow: auto;
+  border-radius: 40px;
+  outline: none;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+}
+
+.my-modal-overlay-class {
+  display: flex;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  top: 50%;
+  left: 50%;
+  height: 100vh;
+  width: 100vw;
+
+  transform: translate(-50%, -50%);
+
+  text-align: center;
+  position: fixed;
+  background-color: "rgba(255, 255, 255, 0.75)";
+}
+.cancel-btn {
+  position: absolute;
+  top: 10px;
+  right: 18px;
+}
+.cancel-btn:hover {
+  cursor: pointer;
+}
+.recipe-card-sm {
+  position: absolute;
+  width: 200px;
+  height: 150px;
+  padding: 20px;
+  top: 220px;
+}
+.recipe-card-sm > img {
+  border-radius: 30%;
+  width: 120px;
+  height: 120px;
+  margin-bottom: 10px;
+}
