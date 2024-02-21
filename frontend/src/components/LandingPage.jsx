@@ -3,8 +3,11 @@ import { useNavigate } from "react-router-dom";
 import "./styles/Landingpage.css";
 import { jwtDecode } from "jwt-decode";
 import { useAuthContext } from "../AuthContext";
+import Modal from "react-modal";
 
-const LandingPage = () => {
+Modal.setAppElement("#root");
+
+const LandingPage = ({ isOpen, onClose }) => {
   const navigate = useNavigate();
   const { login } = useAuthContext();
 
@@ -77,7 +80,7 @@ const LandingPage = () => {
           const userId = decodedToken.userId;
         }
 
-        navigate("/lobby");
+        navigate("/");
 
         console.log("Login successful");
       } else {
@@ -86,63 +89,77 @@ const LandingPage = () => {
     } catch (error) {
       console.error("Error during login:", error);
     }
+    onClose();
   };
 
   return (
-    <div className="landingpage">
-      <h1>Welcome to Mamani cooks</h1>
+    <Modal isOpen={isOpen} onRequestClose={onClose} className="modal">
+      <div className="landingpage">
+        <div className="login-content">
+          <h1>Welcome to Mamani's kitchen</h1>
+          <form onSubmit={handleRegisterSubmit}>
+            <div className="register-container">
+              <div className="register-input">
+                <h1 className="heading-register">Register</h1>
+                <label>
+                  Username:
+                  <input
+                    type="text"
+                    name="username"
+                    value={registerData.username}
+                    onChange={handleRegisterChange}
+                  />
+                </label>
+                <label>
+                  Password:
+                  <input
+                    type="password"
+                    name="password"
+                    value={registerData.password}
+                    onChange={handleRegisterChange}
+                  />
+                </label>
+              </div>
+              <button
+                className="register-btn"
+                type="submit"
+                onClick={handleRegisterSubmit}
+              >
+                Register
+              </button>
+            </div>
+          </form>
 
-      {/* Register Form */}
-      <form onSubmit={handleRegisterSubmit}>
-        <h2>Register</h2>
-
-        <label>
-          Username:
-          <input
-            type="text"
-            name="username"
-            value={registerData.username}
-            onChange={handleRegisterChange}
-          />
-        </label>
-        <label>
-          Password:
-          <input
-            type="password"
-            name="password"
-            value={registerData.password}
-            onChange={handleRegisterChange}
-          />
-        </label>
-        <button type="submit" onClick={handleRegisterSubmit}>
-          Register
-        </button>
-      </form>
-
-      {/* Login Form */}
-      <form onSubmit={handleLoginSubmit}>
-        <h2>Login</h2>
-        <label>
-          Username:
-          <input
-            type="text"
-            name="username"
-            value={loginData.username}
-            onChange={handleLoginChange}
-          />
-        </label>
-        <label>
-          Password:
-          <input
-            type="password"
-            name="password"
-            value={loginData.password}
-            onChange={handleLoginChange}
-          />
-        </label>
-        <button type="submit">Login</button>
-      </form>
-    </div>
+          {/* Login Form */}
+          <form onSubmit={handleLoginSubmit}>
+            <div className="register-container">
+              <h1 className="heading-register">Login</h1>
+              <label>
+                Username:
+                <input
+                  type="text"
+                  name="username"
+                  value={loginData.username}
+                  onChange={handleLoginChange}
+                />
+              </label>
+              <label>
+                Password:
+                <input
+                  type="password"
+                  name="password"
+                  value={loginData.password}
+                  onChange={handleLoginChange}
+                />
+              </label>
+              <button className="register-btn" type="submit">
+                Login
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </Modal>
   );
 };
 

@@ -247,31 +247,27 @@ export async function saveRecipe(req, res) {
   }
 }
 export async function getRecipes(req, res) {
-  if (req.query.name) {
-    // console.log("getting recipe info", req.query.name);
-    // return;
-    try {
-      const recipe = await Recipe.findOne({ name: req.query.name });
+  // try {
+  //   const recipe = await Recipe.findOne({ name: req.query.name });
 
-      if (recipe) {
-        // If the recipe is found, send it back as a JSON response
-        res.json(recipe);
-      } else {
-        // If the recipe is not found, send a 404 (Not Found) response
-        res.status(404).send("Recipe not found");
-      }
-    } catch (error) {
-      res.status(500).send(error.message);
-    }
-  } else {
-    try {
-      const allRecipes = await Recipe.find({});
+  //   if (recipe) {
+  //     // If the recipe is found, send it back as a JSON response
+  //     res.json(recipe);
+  //   } else {
+  //     // If the recipe is not found, send a 404 (Not Found) response
+  //     res.status(404).send("Recipe not found");
+  //   }
+  // } catch (error) {
+  //   res.status(500).send(error.message);
+  // }
 
-      res.status(200).json(allRecipes);
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: "Internal server error" });
-    }
+  try {
+    const allRecipes = await Recipe.find({});
+
+    res.status(200).json(allRecipes);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
   }
 }
 export async function getRecipeInfo(req, res) {}

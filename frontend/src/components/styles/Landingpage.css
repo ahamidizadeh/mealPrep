@@ -1,34 +1,95 @@
-.landingpage {
-  width: 500px;
-  height: 500px;
-  border-radius: 10px;
+.modal {
+  margin-top: 200px;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
   align-items: center;
-  background-color: rgb(224, 163, 49);
-}
-.landingpage h1,
-h2 {
-  text-align: center;
+  justify-content: center;
+  background-color: white;
 }
 
-label {
-  box-sizing: border-box;
-  display: block;
-  margin-top: 10px;
+.landingpage {
+  width: 600px;
+  height: 600px;
+  border-radius: 10px;
+  background-image: url("/images/background-mamani.jpeg");
+  background-size: cover; /* Cover the entire area */
+  background-position: center; /* Center the background image */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Distribute space */
+  color: white; /* Text color for contrast */
+  position: relative; /* For positioning children */
+}
+
+.login-content {
+  padding: 20px; /* Padding around content */
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.3
+  ); /* Semi-transparent overlay for readability */
+}
+
+.login-content {
+  margin-top: 140px;
+  display: flex;
+
+  flex-direction: column;
+  justify-content: center; /* Center login info */
+  align-items: center; /* Align items in the center */
+}
+.login-content > h1 {
+  top: 0;
+  color: white;
+  position: absolute;
+}
+.heading-register {
+  border-radius: 10%;
+  margin-bottom: 20px;
+  color: white;
+
+  font-family: Arial, Helvetica, sans-serif;
+}
+.picture-main img {
+  max-width: 100%; /* Ensure image does not overflow */
+  height: auto; /* Maintain aspect ratio */
 }
 input {
-  margin-left: 10px;
+  border-radius: 10px;
 }
-.landingpage button {
-  color: black;
+label {
+  font-size: 18px;
+  font-weight: 700;
+  margin-right: 20px;
+}
+.register-container {
+  padding: 10px;
+  text-align: center;
+}
+/* Additional styles for input fields and labels for better readability */
+input[type="text"],
+input[type="password"] {
+  margin-left: 10px;
+  margin: 20px 0; /* Space out the inputs */
+  padding: 8px; /* Padding for input fields */
+  background: transparent; /* Transparent background */
+  border: 1px solid white; /* Border to make input fields visible */
+  color: white; /* Text color */
+}
+
+.register-btn {
+  background-color: #ffc107;
+  border-radius: 19px; /* .register-btn background color */
+  border: none; /* Remove border */
+  padding: 10px 20px; /* Padding inside the button */
+  cursor: pointer; /* Cursor to pointer */
+  margin-top: 10px; /* Space above the button */
+}
+.register-btn:hover {
   cursor: pointer;
-  width: 100px;
-  box-sizing: border-box;
-  margin-top: 10px;
-  padding: 3px;
-  line-height: 25px;
-  align-self: center;
+  transform: scale(1.2);
+}
+input:focus {
+  background-color: white;
+  color: black;
 }

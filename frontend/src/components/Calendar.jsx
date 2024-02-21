@@ -2,15 +2,17 @@ import React, { useEffect, useState } from "react";
 import "./styles/Calendar.css";
 import { useAuthContext } from "../AuthContext.jsx";
 import { useRecipes } from "../RecipeContext.jsx";
+import { useNavigate } from "react-router-dom";
 const today = new Date().toISOString().split("T")[0];
 
-export default function Calendar({ recipe }) {
+export default function Calendar({ recipe, onClose }) {
   const [selectedTime, setSelectedTime] = useState("");
+
   const [selectedDate, setSelectedDate] = useState(today);
   const [bookedTimes, setBookedTimes] = useState({});
   const [hoveredBookedRecipe, setHoveredBookedRecipe] = useState("");
-  const { bookedRecipes } = useRecipes();
-
+  const { bookedRecipes, refreshRecipes } = useRecipes();
+  const navigate = useNavigate();
   const radius = 230;
   const diameter = radius * 2;
 
@@ -90,23 +92,32 @@ export default function Calendar({ recipe }) {
   function combineDateTime(date, time) {
     return `${date}T${time}:00.000Z`;
   }
-  const handleRecipeSave = (recipe) => {
+
+  const handleRecipeSave = async (recipe) => {
     const newTime = { ...bookedTimes, [selectedDate]: selectedTime };
     setBookedTimes(newTime);
 
     const startDate = combineDateTime(selectedDate, selectedTime);
 
-    scheduleRecipes(
-      {
-        start: startDate,
-        recipeId: recipe._id,
-        title: recipe.name,
-        id: generateUniqueId(),
-      },
-      id
-    );
+    try {
+      await scheduleRecipes(
+        {
+          start: startDate,
+          recipeId: recipe._id,
+          title: recipe.name,
+          id: generateUniqueId(),
+        },
+        id
+      );
+      // Refresh after the save is successful
+      refreshRecipes();
+    } catch (error) {
+      console.error("Error saving the recipe:", error);
+    }
+
+    onClose();
   };
-  console.log("booking title", hoveredBookedRecipe);
+  console.log("booked", bookedRecipes);
   return (
     <div className="calendar-clock-container">
       <svg
@@ -122,16 +133,21 @@ export default function Calendar({ recipe }) {
           }:00`;
 
           // Determine if this specific time is booked
-          const isBooked = bookedTimes[selectedDate]?.some(
-            (booking) => booking.time === timeString
-          );
-          const booking = bookedTimes[selectedDate]?.find(
-            (booking) => booking.time === timeString
-          );
+          const isBooked =
+            Array.isArray(bookedTimes[selectedDate]) &&
+            bookedTimes[selectedDate].find(
+              (booking) => booking.time === timeString
+            );
+
+          const booking =
+            Array.isArray(bookedTimes[selectedDate]) &&
+            bookedTimes[selectedDate]?.find(
+              (booking) => booking.time === timeString
+            );
 
           const { x, y } = calculatePosition(_, index, 24);
           return (
-            <React.Fragment>
+            <React.Fragment key={index}>
               <g
                 className="circle-container"
                 onMouseEnter={() =>
@@ -143,7 +159,6 @@ export default function Calendar({ recipe }) {
                     `${index.toString().length === 2 ? index : "0" + index}:00`
                   )
                 }
-                key={index}
               >
                 <circle
                   className={`circle-sm ${isBooked ? "booked" : ""} ${
@@ -154,7 +169,6 @@ export default function Calendar({ recipe }) {
                   r="20"
                 />
                 <text
-                  key={index}
                   x={x}
                   y={y}
                   fontSize="12"

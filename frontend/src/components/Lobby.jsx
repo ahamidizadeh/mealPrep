@@ -5,18 +5,23 @@ import "./styles/UserRecipes.css";
 import "./styles/Calendar.css";
 import PersonIcon from "@mui/icons-material/Person";
 import "./styles/Lobby.css";
+import LocalFireDepartmentRoundedIcon from "@mui/icons-material/LocalFireDepartmentRounded";
 import ManageSearchIcon from "@mui/icons-material/ManageSearch";
 import { useAuthContext } from "../AuthContext.jsx";
 import { useRecipes } from "../RecipeContext";
 import Recipes from "./Recipes.jsx";
 import RecipeDetails from "./RecipeDetails.jsx";
+import PlaylistAddCheckCircleSharpIcon from "@mui/icons-material/PlaylistAddCheckCircleSharp";
+import LandingPage from "./LandingPage.jsx";
 
 export default function Lobby({ recipes }) {
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const [isSignUpOpen, setIsSignUpOpen] = useState(false);
   const { setSelectedRecipe, bookedRecipes, setShoppingList } = useRecipes();
   const [scheduledRecipes, setScheduledRecipes] = useState([]);
   const [hoverDelay, setHoverDelay] = useState(null);
   const [hoveredRecipe, setHoveredRecipe] = useState(null);
-  const { logout, id, username } = useAuthContext();
+  const { logout, id, username, authToken } = useAuthContext();
 
   const navigate = useNavigate();
 
@@ -80,9 +85,7 @@ export default function Lobby({ recipes }) {
     setSelectedRecipe(recipe);
     navigate(`/recipes/${id}`);
   };
-
   const handleDrop = (info) => {};
-
   const handleDateClick = () => {};
   const handleEventDragStop = (info) => {
     const id = info.event.id;
@@ -199,7 +202,10 @@ export default function Lobby({ recipes }) {
     //set context to pass to shoppingList.jsx
     setShoppingList(finalIngredients);
   };
-
+  const handleGroceryClick = () => {
+    console.log("hello");
+    navigate("/groceries");
+  };
   return (
     <div className="lobby-cnt">
       <header>
@@ -210,7 +216,7 @@ export default function Lobby({ recipes }) {
           <div className="input-container">
             <div className="spacer-18"></div>
             <div className="search-icon">
-              <ManageSearchIcon style={{ fontSize: "20px" }} />
+              <ManageSearchIcon />
             </div>
             <input
               className="input-search"
@@ -220,52 +226,52 @@ export default function Lobby({ recipes }) {
           </div>
           <div className="spacer-48"></div>
           <div className="header-btns">
-            <a className="login-link">
-              <PersonIcon />
-              <div className="spacer-4"></div>
-              Login
-            </a>
+            {authToken ? (
+              <div className="container-navbar-header">
+                <div
+                  className="groccery-icon-container"
+                  onClick={handleGroceryClick}
+                >
+                  <PlaylistAddCheckCircleSharpIcon
+                    style={{ fontSize: "2.5rem" }}
+                    className="shopping-list"
+                  />
+                  <div className="spacer-3"></div>
+                  <div className="tooltip">Groceries</div>
+                </div>
+                <div className="kitchen-icon-container">
+                  <LocalFireDepartmentRoundedIcon
+                    style={{ fontSize: "2.5rem" }}
+                    className="fire-icon"
+                  />
+                  <div className="tooltip">Kitchen</div>
+                </div>
 
-            <a className="login-link">
-              <div>Sign up</div>
-            </a>
+                <button onClick={() => logout()} className="logout-btn">
+                  Log out
+                </button>
+              </div>
+            ) : (
+              <>
+                <a className="login-link" onClick={() => setIsLoginOpen(true)}>
+                  <PersonIcon />
+                  <div className="spacer-4"></div>
+                  Login
+                </a>
+
+                <a className="login-link" onClick={() => setIsLoginOpen(true)}>
+                  <div>Sign up</div>
+                </a>
+              </>
+            )}
           </div>
+          <LandingPage
+            isOpen={isLoginOpen}
+            onClose={() => setIsLoginOpen(false)}
+          />
         </div>
       </header>
       <main className="main-content">
-        {/* <div className="filter-search">
-          <div className="filter-buttons">
-            <button className="button-filter">Italian</button>
-            <button className="button-filter">Easy Recipes</button>
-            <button className="button-filter">Easy Recipes</button>
-            <button className="button-filter">Easy Recipes</button>
-            <button className="button-filter">Easy Recipes</button>
-            <button className="button-filter">Easy Recipes</button>
-            <button className="button-filter">Easy Recipes</button>
-            <button className="button-filter">Easy Recipes</button>
-            <button className="button-filter">Easy Recipes</button>
-            <button className="button-filter">Easy Recipes</button>
-            <button className="button-filter">Italian</button>
-            <button className="button-filter">Easy Recipes</button>
-          </div>
-          <div className="filter-prefrence">
-            <button className="button-filter">Vegan</button>
-            <button className="button-filter">nut free</button>
-            <button className="button-filter">under 30mins</button>
-            <button className="button-filter">Vegan</button>
-            <button className="button-filter">nut free</button>
-            <button className="button-filter">under 30mins</button>
-            <button className="button-filter">Vegan</button>
-            <button className="button-filter">nut free</button>
-            <button className="button-filter">under 30mins</button>
-            <button className="button-filter">Vegan</button>
-            <button className="button-filter">nut free</button>
-            <button className="button-filter">under 30mins</button>
-            <button className="button-filter">Vegan</button>
-            <button className="button-filter">nut free</button>
-            <button className="button-filter">under 30mins</button>
-          </div>
-        </div> */}
         <div className="recipes-display">
           <div className="filter-prefrence">
             <button className="button-filter">Vegan</button>

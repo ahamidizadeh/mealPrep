@@ -10,11 +10,11 @@
   border: black;
 }
 .login-link {
-  border: solid 1px black;
+  border: solid 3px white;
   border-radius: 500px;
   font-size: 16px;
   padding: 10px;
-  color: black;
+  color: white;
   line-height: 25px;
   align-items: center;
   width: 100px;
@@ -22,7 +22,8 @@
   text-wrap: nowrap;
 }
 .login-link:hover {
-  background-color: rgba(240, 248, 255, 0.787);
+  background-color: white;
+  color: black;
   cursor: pointer;
 }
 .spacer-35 {
@@ -32,16 +33,11 @@
   width: 10px;
 }
 .search-icon {
+  color: black;
+  font-size: 25px;
   display: flex;
   justify-content: center;
   align-items: center;
-}
-.header-btns {
-  margin-left: auto;
-  margin-right: 100px;
-  width: 150px;
-  display: flex;
-  gap: 50px;
 }
 
 .spacer-25 {
@@ -49,17 +45,18 @@
 }
 .input-container {
   border-radius: 500px;
+  border: 2px solid transparent;
   display: flex;
   height: 48px;
   font-size: 16px;
   min-width: 180px;
   max-width: 1036px;
   background-color: white;
-}
-.input-search:focus {
-  outline: none;
+  transition: width 1s, transform 0.3s ease-in-out;
 }
 .input-search {
+  outline: none;
+  font-size: 20px;
   flex: 1;
   min-width: 300px;
   border: none;
@@ -69,6 +66,12 @@
 }
 .spacer-48 {
   width: 48px;
+}
+.input-container:focus-within {
+  width: 1000px;
+  margin-left: 75px;
+  border-color: #ffc107;
+  transform: scale(1.1);
 }
 
 .main-content {
@@ -98,8 +101,6 @@
 .recipes-lobby {
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
-  /* width: 100%; */
-
   align-items: center;
   background-color: white;
   overflow-x: scroll;
@@ -115,7 +116,6 @@
 }
 .list-recipe {
   display: flex;
-
   justify-content: flex-start;
   scroll-snap-align: start;
   list-style: none;
@@ -177,15 +177,6 @@
   transform: translateY(-20px);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
 }
-/* .recipe-item {
-  position: relative;
-  padding: 10px;
-  width: 300px;
-  background-color: azure;
-  height: 350px;
-  border-radius: 30%;
-  text-align: center;
-} */
 
 .card-name {
   margin-top: 5px;
@@ -201,6 +192,7 @@
 }
 .button-display {
   position: absolute;
+  text-align: center;
   left: 0;
   right: 0;
   bottom: 0;
@@ -229,20 +221,22 @@
   box-sizing: border-box;
 }
 .button-display > button {
-  background-color: darkolivegreen;
-  color: azure;
+  background-color: gold;
+  color: black;
   margin-top: 15px;
   font-size: 15px;
   width: fit-content;
   text-align: center;
-  padding: 7px;
+  padding: 10px;
   border: none;
   border-radius: 10px;
   height: fit-content;
+  transition: background-color 1.3s ease;
 }
 .button-display > button:hover {
-  transform: scale(1.02);
+  transform: scale(1.04);
   background-color: darkgreen;
+  color: white;
 }
 h1 {
   color: rgb(45, 30, 28);
@@ -282,20 +276,6 @@ h1 {
   justify-content: center;
   align-items: center;
 }
-.logout-btn {
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-size: 15px;
-  width: 125px;
-  height: 40px;
-  background-color: rgb(147, 19, 19);
-}
-.logout-btn:hover {
-  background-color: rgb(181, 3, 3);
-}
 
 /* .all-recipes {
   border: 0.4px solid rgb(47, 42, 42);
@@ -314,4 +294,55 @@ h1 {
 li {
   margin-left: 5px;
   padding: 6px;
+}
+.header-btns {
+  margin-left: auto;
+  margin-right: 175px;
+  width: 150px;
+  display: flex;
+  gap: 50px;
+}
+.container-navbar-header {
+  width: 350px;
+  height: 100px;
+  display: flex;
+  gap: 20px;
+  margin-right: 50px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+.navbar-kitchen-img {
+  margin-right: 10px;
+  height: 50px;
+  width: 135px;
+}
+.logout-btn {
+  text-align: center;
+  width: 100px;
+  height: 40px;
+  border-radius: 10px;
+  background-color: #ffc107;
+}
+.logout-btn:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.groccery-icon-container,
+.kitchen-icon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.spacer-3 {
+  width: 3px;
+}
+.groccery-icon-container:hover {
+  color: yellow;
+  cursor: pointer;
+}
+.kitchen-icon-container:hover {
+  color: red;
+  cursor: pointer;
 }

@@ -2,16 +2,14 @@ import React, { useState, useEffect, useContext } from "react";
 import { Navigate } from "react-router-dom";
 import { AuthContext } from "./AuthContext";
 
-const PrivateRoute = ({ children, isLoggedIn }) => {
-  const { authToken } = useContext(AuthContext);
+const PrivateRoute = ({ children }) => {
   const [recipes, setRecipes] = useState([]);
 
   useEffect(() => {
     const fetchRecipes = async () => {
       try {
         const token = localStorage.getItem("token");
-        // const decodedToken = jwtDecode(token);
-        // setUserId(decodedToken.userId);
+
         const response = await fetch("/api/recipes", {
           method: "GET",
           headers: {
@@ -33,11 +31,7 @@ const PrivateRoute = ({ children, isLoggedIn }) => {
     fetchRecipes();
   }, []);
 
-  return authToken ? (
-    React.cloneElement(children, { recipes })
-  ) : (
-    <Navigate to="/" replace />
-  );
+  return React.cloneElement(children, { recipes });
 };
 
 export default PrivateRoute;

@@ -26,6 +26,7 @@ export default function CustomCalendarModal({
         {recipe ? (
           <div className="recipe-card-sm">
             <img
+              key={recipe._id}
               src={`../../public/images/${recipe.name}.jpeg`}
               alt="recipe"
             ></img>
@@ -33,7 +34,11 @@ export default function CustomCalendarModal({
           </div>
         ) : null}
         <div className="calendar-container">
-          <Calendar recipe={recipe} onConfirm={handleConfirmation} />
+          <Calendar
+            recipe={recipe}
+            onConfirm={handleConfirmation}
+            onClose={onRequestClose}
+          />
         </div>
       </>
     </Modal>

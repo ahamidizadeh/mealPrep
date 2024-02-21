@@ -63,9 +63,15 @@ export const RecipeProvider = ({ children }) => {
       fetchIngredients();
     }
   }, [id]);
+
+  const refreshRecipes = () => {
+    console.log("refreshing....");
+    fetchBookedRecipes();
+  };
   return (
     <RecipeContext.Provider
       value={{
+        refreshRecipes,
         selectedRecipe,
         setSelectedRecipe,
         ingredients,

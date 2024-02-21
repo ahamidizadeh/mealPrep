@@ -8,6 +8,7 @@ import Contact from "./components/ContactUs";
 import LandingPage from "./components/LandingPage";
 import PrivateRoute from "./PrivateRoutes.jsx";
 import RecipeDetails from "./components/RecipeDetails";
+import Groceries from "./components/Groceries.jsx";
 import { useAuthContext } from "./AuthContext.jsx";
 
 function App() {
@@ -15,11 +16,9 @@ function App() {
 
   return (
     <>
-      {/* {authToken && <Navbar />} */}
       <Routes>
-        <Route path="/" element={<LandingPage />} />
         <Route
-          path="/lobby"
+          path="/"
           element={
             <PrivateRoute>
               <Lobby />
@@ -39,6 +38,14 @@ function App() {
           element={
             <PrivateRoute>
               <Contact />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/groceries"
+          element={
+            <PrivateRoute>
+              <Groceries />
             </PrivateRoute>
           }
         />

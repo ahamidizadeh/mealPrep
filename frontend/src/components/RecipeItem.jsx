@@ -44,14 +44,15 @@ export default function RecipeItem({ recipe }) {
     >
       {isHovered ? (
         <div className="button-display">
-          <button onClick={() => handleOpen(recipe)}>Add Calendar</button>
-          <button>Shop ingredients</button>
+          <button onClick={() => handleOpen(recipe)}>Schedule</button>
+          <button>Shop</button>
         </div>
       ) : (
         <div>
           <div className="card-name">{recipe.name}</div>
           <div>
             <img
+              key={recipe._id}
               className="image-recipe"
               src={`../../public/images/${recipe.name}.jpeg`}
             ></img>
