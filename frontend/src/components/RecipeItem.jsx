@@ -42,7 +42,22 @@ export default function RecipeItem({ recipe }) {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      {isHovered ? (
+      <div>
+        <div className="card-name">{recipe.name}</div>
+        <div>
+          <img
+            key={recipe._id}
+            className="image-recipe"
+            src={`../../public/images/${recipe.name}.jpeg`}
+          ></img>
+          <div className="button-display">
+            <button onClick={() => handleOpen(recipe)}>Schedule</button>
+            <button>Shop</button>
+          </div>
+        </div>
+      </div>
+
+      {/* {isHovered ? (
         <div className="button-display">
           <button onClick={() => handleOpen(recipe)}>Schedule</button>
           <button>Shop</button>
@@ -58,7 +73,7 @@ export default function RecipeItem({ recipe }) {
             ></img>
           </div>
         </div>
-      )}
+      )} */}
       <CustomCalendarModal
         recipe={selectedRecipe}
         onRequestClose={handleClose}

@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import path from "path";
 import { fileURLToPath } from "url";
 import Ingredient from "./db/models/ingredientsModel.js";
+import { router as orderRoutes } from "./routes/orderRoutes.js";
 import { router as authRoutes } from "./routes/authRoutes.js";
 import { router as recipeRoutes } from "./routes/recipesRoutes.js";
 import { router as ingredientRoutes } from "./routes/ingredientRoutes.js";
@@ -34,6 +35,7 @@ app.use("/api/ai", openAiRoutes);
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use("/api/auth", authRoutes);
 app.use("/api/recipes", recipeRoutes);
+app.use("/api/services", orderRoutes);
 // app.use("/", console.log("reaching out"));
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
